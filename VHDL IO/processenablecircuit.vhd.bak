@@ -1,0 +1,31 @@
+
+library IEEE;	
+use IEEE.STD_LOGIC_1164.ALL;	
+use IEEE.STD_LOGIC_ARITH.ALL;	 
+use IEEE.STD_LOGIC_UNSIGNED.ALL; 
+
+entity processenablecircuit is	
+Port (loadprocess : in std_logic; 
+Done : in std_logic;
+INTR : in std_logic; -- pulse
+reset :in std_logic;
+processenable : out std_logic);
+end processenablecircuit;
+
+architecture Behavioral of processenablecircuit is
+component DFF is
+PORT( D,CLOCK: in std_logic;
+Q: out std_logic);
+end component;
+
+Signal C,D:std_logic;
+begin	
+
+process(loadprocess,Done,INTR,reset) 
+begin
+D <= (loadprocess and ((not Done) or INTR) and (not reset));
+C <= (((INTR OR Done) and (not reset)) OR reset);
+end process;	
+L:DFF PORT MAP (D,C,processenable);
+
+end Behavioral;
