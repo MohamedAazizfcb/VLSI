@@ -18,23 +18,23 @@ architecture Behavioral of ram is
 type rama is array(500 downto 0) of std_logic_vector(255 downto 0);	
 signal ram1_1 : rama;	
 -------------------------------------- Signal declaration 
-
+signal dummy :std_logic;
 
 begin	
 
 process(Clk, write_en) 
 begin
-if Clk'event and Clk = '1' then	
-if write_en = '1' then -- In this process writing the input data into ram 
-ram1_1(conv_integer(write_address)) <= data_in;	
-end if;	
+if rising_edge(write_en) then	-- In this process writing the input data into ram 
+ram1_1(conv_integer(write_address)) <= data_in;
+else
+dummy <= '0';
 end if;	
 end process;	
 
 
 process(Clk, read_en) 
 begin
-if Clk'event and Clk = '1' then	
+if rising_edge(clk) then	
 if read_en = '1' then -- In this process reading the output data from ram 
 data_out <= ram1_1(conv_integer(read_address)); -- Reading the data from RAM
 else data_out<=(Others => 'Z');

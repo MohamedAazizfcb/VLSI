@@ -13,7 +13,7 @@ processenable : out std_logic);
 end processenablecircuit;
 
 architecture Behavioral of processenablecircuit is
-component DFF is
+component DFLIPFL is
 PORT( D,CLOCK: in std_logic;
 Q: out std_logic);
 end component;
@@ -26,6 +26,6 @@ begin
 D <= (loadprocess and ((not PDone) or INTR) and (not reset));
 C <= (((INTR OR PDone) and (not reset)) OR reset);
 end process;	
-L:DFF PORT MAP (D,C,processenable);
+L:DFLIPFL PORT MAP (D,C,processenable);
 
 end Behavioral;

@@ -5,39 +5,47 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity CPU is	
 Port (
-Done : in std_logic;
+Done,reset,clk : in std_logic;
 result : in std_logic_vector(3 Downto 0);
 readen : in std_logic; -- read enable signal	
-dataout : out std_logic_vector(15 downto 0);
-CLK,LP,INTR,CNNIMAGE,Reset :out std_logic);
+dataout : out std_logic_vector(15 downto 0)
+);
 end CPU;
 architecture Behavioral of CPU is	
 ------------------------------------- RAM declaration 
-type rama is array(255 downto 0) of std_logic_vector(15 downto 0);	
-signal ram1_1 : rama;	
--------------------------------------- Signal declaration 
-Signal CPUCLK,LOADPROCESS,INTERRUPT,CNNIMAGELOAD,rst :std_logic;
-Signal ResetCPU : std_logic;--resets the address of reading of the cpu and the chip
-Signal Address : std_logic_vector(7 downto 0) := "00000000";
+type ramcpu is array(1023 downto 0) of std_logic_vector(15 downto 0);	
+signal ramcpu_1 : ramcpu;	
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+--Component : 
+Component FULLADDER IS
+GENERIC (n : integer := 8);
+PORT(A,B : IN std_logic_vector(n-1  DOWNTO 0);
+Cin,en : IN std_logic;  
+S : OUT std_logic_vector(n-1 DOWNTO 0);           
+Cout : OUT std_logic);
+END  Component;
+-------------------------------------- Signal declaration :
+Signal Dummy : std_logic;
+Signal Address : std_logic_vector(9 downto 0);
+Signal nextAddress : std_logic_vector(9 downto 0);
 begin	
-
-process(CPUClk, readen , Address) 
+i0: FULLADDER Generic Map(10) Port Map (Address,"0000000001",'0','1',nextAddress,dummy);
+process(CLK, readen , Address) 
 begin
-if CPUClk'event and CPUClk = '1' and ResetCPU = '0' then	
-if readen = '1' then -- In this process reading the output data from cpu 
-dataout <= ram1_1(conv_integer(Address)); -- Reading the data from CPU
-Address <= Address + 1;
-else dataout<=(Others => 'Z');
-end if;
-elsif resetCPU = '1' then
-Address <= "00000000";
-end if;	
+	if rising_edge(readen) then
+		if( reset = '0') then -- In this process reading the output data from cpu 
+			dataout <= ramcpu_1(conv_integer(Address)); -- Reading the data from CPU
+			Address <= NextAddress;
+		else
+			dataout<="ZZZZZZZZZZZZZZZZ";
+			Address <= "0000000000";
+		end if;
+	elsif (reset = '1') then
+		dataout<="ZZZZZZZZZZZZZZZZ";
+		Address <= "0000000000";
+	else
+		dummy <= dummy;
+	end if;
 end process;	
-
-CLK <= CPUCLK;
-LP <= LOADPROCESS;	
-INTR <= INTERRUPT;
-CNNIMAGE <= CNNIMAGELOAD;
-reset <= rst or ResetCPU;
-
 end Behavioral;

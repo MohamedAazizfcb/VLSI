@@ -28,7 +28,7 @@ dataout <= (others=>'0'); -- CNN address
 else
 	if reset = '1' then
 	dataout <= (others=> '0');
-	elsif clk'event  and clk = '1' then
+	elsif rising_edge(clk) then
 		if writ= '1' then
 		dataout<= datain;
 		end if;

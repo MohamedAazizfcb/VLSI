@@ -1,0 +1,263 @@
+mem load -filltype value -filldata 1C30 -fillradix hexadecimal /iochip/i/ramcpu_1(0)
+mem load -filltype value -filldata 1C40 -fillradix hexadecimal /iochip/i/ramcpu_1(1)
+mem load -filltype value -filldata 950 -fillradix hexadecimal /iochip/i/ramcpu_1(2)
+mem load -filltype value -filldata 0000 -fillradix hexadecimal /iochip/i/ramcpu_1(3)
+mem load -filltype value -filldata {1111 } -fillradix hexadecimal /iochip/i/ramcpu_1(4)
+mem load -filltype value -filldata 0001 -fillradix hexadecimal /iochip/i/ramcpu_1(5)
+mem load -filltype value -filldata 0000 -fillradix hexadecimal /iochip/i/ramcpu_1(6)
+add wave -position insertpoint sim:/iochip/*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: LEN OVO  Hostname: AHMED  ProcessID: 4892
+#           Attempting to use alternate WLF file "./wlftv6x57r".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftv6x57r
+mem load -filltype value -filldata 1C30 -fillradix hexadecimal /iochip/i/ramcpu_1(0)
+mem load -filltype value -filldata 1C40 -fillradix hexadecimal /iochip/i/ramcpu_1(1)
+mem load -filltype value -filldata 950 -fillradix hexadecimal /iochip/i/ramcpu_1(2)
+mem load -filltype value -filldata 0000 -fillradix hexadecimal /iochip/i/ramcpu_1(3)
+mem load -filltype value -filldata {1111 } -fillradix hexadecimal /iochip/i/ramcpu_1(4)
+mem load -filltype value -filldata 0001 -fillradix hexadecimal /iochip/i/ramcpu_1(5)
+mem load -filltype value -filldata 0000 -fillradix hexadecimal /iochip/i/ramcpu_1(6)
+mem load -filltype value -filldata EAAA -fillradix hexadecimal /iochip/i/ramcpu_1(4)
+mem load -filltype value -filldata {EABA } -fillradix hexadecimal /iochip/i/ramcpu_1(6)
+mem load -filltype value -filldata {0000 } -fillradix hexadecimal /iochip/i/ramcpu_1(7)
+force -freeze sim:/iochip/CLK 1 0, 0 {50 ps} -r 100
+force -freeze sim:/iochip/OuterRead 0 0
+force -freeze sim:/iochip/OuterWrite 0 0
+force -freeze sim:/iochip/ActivateOuterAddress 0 0
+force -freeze sim:/iochip/INCEnable 0 0
+force -freeze sim:/iochip/PDone 0 0
+force -freeze sim:/iochip/OuterAddress 00000000000000000
+force -freeze sim:/iochip/ResultIn 0000
+# Value length (3) does not equal array index length (4).
+# 
+# ** Error: (vsim-4011) Invalid force value: 000 0.
+# 
+force -freeze sim:/iochip/ResultIn 0000 0
+force -freeze sim:/iochip/CLK 1 0, 0 {50 ns} -r 100
+force -freeze sim:/iochip/LP 0 0
+force -freeze sim:/iochip/INTR 0 0
+force -freeze sim:/iochip/CNNIMGLOAD 0 0
+force -freeze sim:/iochip/Reset 1 0
+run
+run
+force -freeze sim:/iochip/Reset 0 0
+run
+run
+force -freeze sim:/iochip/INTR 1 0
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 400 ns  Iteration: 4  Instance: /iochip/i2
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 500 ns  Iteration: 0  Instance: /iochip/i7/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 500 ns  Iteration: 0  Instance: /iochip/i7/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 400 ps  Iteration: 4  Instance: /iochip/i2
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 500 ps  Iteration: 0  Instance: /iochip/i7/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 500 ps  Iteration: 0  Instance: /iochip/i7/counter1
+force -freeze sim:/iochip/INTR 0 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+
+run
+
+run
+
+
+run
+
+run
+
+run
+
+
+run
+
+
+run
+
+
+run
+
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+run
+
+force -freeze sim:/iochip/INTR 0 0
+force -freeze sim:/iochip/INTR 0 0
+force -freeze sim:/iochip/INTR 0 0
+force -freeze sim:/iochip/INTR 0 0
+force -freeze sim:/iochip/INTR 0 0
+force -freeze sim:/iochip/INTR 0 0
+force -freeze sim:/iochip/INTR 0 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/iochip/CNNIMGLOAD 1 0
+run
+run
+force -freeze sim:/iochip/INTR 1 0
+run
+force -freeze sim:/iochip/INTR 0 0
+force -freeze sim:/iochip/INTR 0 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10 us  Iteration: 6  Instance: /iochip/i2
+run
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10200 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10200 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10300 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10300 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10400 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10400 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10500 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10500 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10600 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10600 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10700 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10700 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10800 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10800 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10900 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 10900 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11 us  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11 us  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11100 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11100 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11200 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11200 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11300 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11300 ns  Iteration: 0  Instance: /iochip/i8/counter1
+run
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11400 ns  Iteration: 0  Instance: /iochip/i8/counter1
+# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+#    Time: 11400 ns  Iteration: 0  Instance: /iochip/i8/counter1

@@ -12,7 +12,7 @@ loadenable : out std_logic);
 end loadenablecircuit;
 
 architecture Behavioral of loadenablecircuit is
-component DFF is
+component DFLIPFL is
 PORT( D,CLOCK: in std_logic;
 Q: out std_logic);
 end component;
@@ -25,6 +25,6 @@ begin
 D <= ((not loadprocess) and ((not LDone) or INTR) and (not reset));
 C <= (((INTR OR LDone) and (not reset)) OR reset);
 end process;	
-L:DFF PORT MAP (D,C,loadenable);
+L:DFLIPFL PORT MAP (D,C,loadenable);
 
 end Behavioral;

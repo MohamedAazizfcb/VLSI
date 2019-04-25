@@ -25,6 +25,10 @@ S : OUT std_logic_vector(n-1 DOWNTO 0);
 Cout : OUT std_logic);
 end Component;
 
+Component DFLIPFL is
+PORT( D,CLOCK: in std_logic;
+Q: out std_logic);
+end Component;
 Component regster is
 generic(N : integer := 8);
 port( 
@@ -39,7 +43,7 @@ typ : in STD_LOGIC_vector(1 DOWNTO 0);
 dataout :out STD_LOGIC_VECTOR(N-1  downto 0));
 end Component;
 
-Component MUX2 is	
+Component MYMUX is	
 GENERIC (n : integer := 8);
 Port (
 A : in std_logic_vector(n-1 DOWNTO 0);
@@ -48,15 +52,30 @@ S : in std_logic;
 Z : out std_logic_vector(n-1 DOWNTO 0));
 end Component;
 
-Signal FAEN,MS,dummy : std_logic;
+Signal tempfaen,tempfaeninp,FAEN,MS,dummy: std_logic;
 Signal MARo,MARi,tempad,Zeroes : std_logic_vector (15 Downto 0);
 begin
 Zeroes <= (OTHERS => '0');
-FAEN <= ((not Reset) and ((LoadEnable and DecompressionDone) or (ProcessEnable and IncEnable)));
+process(DecompressionDone,Reset,ProcessEnable,IncEnable,loadenable)
+begin
+	if (DecompressionDone = '1') then
+		if ((Reset = '0' and loadenable = '1')) then
+			tempFAEN <= '1';
+		else
+			tempFAEN <= '0';
+		end if;
+	elsif (Reset = '0' and (ProcessEnable = '1' and IncEnable = '1')) then
+		tempFAEN <= '1';
+	else
+		tempFAEN <= '0'; 
+	end if;
+end process;
+dummy <= dummy or tempfaen;
+tempfaeninp <= tempfaen and (not(FAEN));
 MS <= (ActivateOuterAddress and (not (LoadEnable)));
-
-r1 : MUX2 Generic Map (7) PORT MAP (MARo,OuterAddress,MS,tempad);
+r1 : MYMUX Generic Map (16) PORT MAP (MARo,OuterAddress,MS,tempad);
 Address <= tempad;
-r2 : FULLADDER Generic Map (7) PORT MAP (tempad,Zeroes,'1',FAEN,MARi,dummy);
-MR : Regster Generic Map (7) PORT MAP ('1',MARi,CLK,Reset,"00",MARo);
+aa : DFLIPFL PORT MAP (tempfaeninp,clk,FAEN);
+r2 : FULLADDER Generic Map (16) PORT MAP (tempad,Zeroes,'1',FAEN,MARi,dummy);
+MR : Regster Generic Map (16) PORT MAP ('1',MARi,CLK,Reset,"00",MARo);
 end arch;
