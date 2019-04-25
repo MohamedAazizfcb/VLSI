@@ -1,0 +1,39 @@
+load_library tsmc035_typ
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/counter.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/decoder_4to16.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/reg16.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/jsondecompressor.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/decoder_5to32.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/reg8.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/decompressor.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/Rigister.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/MYMUX.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/DFLIPFL.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/bitadder.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/FullAdder.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/ramcontrolreadwrite.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/processenablecircuit.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/loadenablecircuit.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/LDONECircuit.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/AddressGenerator.vhd }
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/Vlsifinal2/IOChip.vhd }
+pre_optimize -common_logic -unused_logic -boundary -xor_comparator_optimize 
+pre_optimize -extract 
+elaborate IOCHIP -architecture arch 
+set register2register 5.000000
+set input2register 5.000000
+set register2output 5.000000
+set_clock -name .work.IOCHIP.arch.CLK -clock_cycle "5.000000"
+set_clock -name .work.IOCHIP.arch.CLK -pulse_width "2.500000"
+optimize .work.IOCHIP.arch -target tsmc035_typ -macro -delay -effort standard -hierarchy flatten 
+optimize_timing .work.IOCHIP.arch 
+optimize_timing .work.IOCHIP.arch -force -single_level 
+report_delay  -num_paths 1 -critical_paths -clock_frequency
+report_area area -cell_usage -all_leafs 
+report_delay delay -num_paths 1 -critical_paths -clock_frequency
+set novendor_constraint_file FALSE
+auto_write -format Verilog IOChip_0.v
+set novendor_constraint_file FALSE
+auto_write -format VHDL IOChip_0.vhd
+set novendor_constraint_file FALSE
+auto_write -format SDF IOChip_0.sdf
