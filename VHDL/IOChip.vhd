@@ -15,16 +15,23 @@ INCEnable : in std_logic;
 PDone : in std_logic;
 OuterAddress : in std_logic_vector(15 DOWNTO 0);
 ResultIn :in std_logic_vector (3 Downto 0);
-CLK,LP,INTR,CNNIMGLOAD,Reset : in std_logic;
+CLK,LP,INTR,CNNIMGLOAD,Rst : in std_logic;
 
 
 -----------------------------------------------
-EnableReadingFromCPU,DecompressionDone,DecompressionDone1,DecompressionDone2,readenable : inout std_logic;
+EnableReadingFromCPU,DecompressionDone : inout std_logic;
+DecompressionDone1,DecompressionDone2 : inout std_logic;
+readenable : inout std_logic;
 DataBus : inout std_logic_vector (15 DOWNTO 0);
 Address : inout std_logic_vector (15 DOWNTO 0);
 DecompressedData,DecompressedData1,DecompressedData2 : inout std_logic_vector(255 Downto 0);
 EnableReadingFromCPU1,EnableReadingFromCPU2: inout std_logic;
 loadingimg,loadingCNN : inout std_logic;
+LDone,loadenable,ProcEn,writeenable : inout std_logic;
+
+
+
+
 -----------------------------------------------
 --OUTPUTS:
 PClk : out std_logic;
@@ -132,35 +139,35 @@ S : in std_logic;
 Z : out std_logic_vector(n-1 DOWNTO 0));
 end Component;
 ------------------------------------------------------------------------------------------------------Signals
-Signal LDone,loadenable,ProcEn,writeenable : std_logic;
-
-
-
-Signal toWritetoRam,zed :std_logic;
-signal  allz : std_logic_vector(27 downto 0);
-signal jsoninput : std_logic_vector (15 downto 0);
+Signal toWritetoRam,zed,resetimg,resetcnn : std_logic;
+Signal allz : std_logic_vector(27 downto 0);
+Signal jsoninput : std_logic_vector (15 downto 0);
 ------------------------------------------------------------------------------------------------------Logic
 begin
-toWritetoRam <= DecompressionDone1 or DecompressionDone2 or writeenable ;
+resetimg <= rst or CNNIMGLoad  or LDONe;
+resetcnn <= rst or (not(CNNIMGLoad))or LDone;
+--toWritetoRam <= DecompressionDone1 or DecompressionDone2 or writeenable ;
 DecompressionDone<=DecompressionDone1 or DecompressionDone2;
 Done <= LDone or PDone;
 Result <= Resultin;
 Pclk <= CLK;
 loadingimg <= '1' when loadenable = '1' and CNNIMGLOAD = '0' else '0';
 loadingcnn <= loadenable and CNNIMGLOAD;
-EnableReadingFromCPU <= EnableReadingFromCPU2 when CNNIMGLOAD = '1' and loadenable = '1' else EnableReadingFromCPU1 when CNNIMGLOAD = '0' else '0';
-i:CPU Port Map (Done,reset,clk,Result,EnableReadingFromCPU,DataBus);
-i0:processenablecircuit Port Map (LP,PDone,INTR,reset,procEn);
+EnableReadingFromCPU <= EnableReadingFromCPU2 when CNNIMGLOAD = '1' and loadenable = '1' else EnableReadingFromCPU1 
+	when CNNIMGLOAD = '0' and loadenable = '1' 
+	else '0';
+i:CPU Port Map (Done,rst,clk,Result,EnableReadingFromCPU,DataBus);
+i0:processenablecircuit Port Map (LP,PDone,INTR,rst,procEn);
 ProcessEnable <= ProcEn;
-i1:loadenablecircuit Port Map (LP,LDone,INTR,reset,loadenable);
+i1:loadenablecircuit Port Map (LP,LDone,INTR,rst,loadenable);
 i2:LDONEcircuit Port Map (DataBus,LoadEnable,loadingcnn,LDONE);
-i3:ramenablereadwrite Port Map (loadenable,DecompressionDone,ProcEn,OuterWrite,OuterRead,readenable,writeenable);
+i3:ramenablereadwrite Port Map (loadenable,DecompressionDone,ProcEn,OuterWrite,OuterRead,readenable,toWritetoRam);
 i4:RamControl Port Map (DecompressedData,Address,readenable,toWritetoRam,CLK,DataFromRam);
-i5:ADDRESSGENERATOR Port Map (Reset,CLK,LoadEnable,toWritetoRam,ProcEn,IncEnable,OuterAddress,ActivateOuterAddress,Address);
+i5:ADDRESSGENERATOR Port Map (Rst,CLK,LoadEnable,toWritetoRam,ProcEn,IncEnable,OuterAddress,ActivateOuterAddress,Address);
 jsoninput <= DataBus(13) & DataBus(13) & DataBus(13 DOWNTO 0);
 zed <= 'Z';
 allz <= "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
-i7:decompressor Port Map(reset,DataBus(15 DOWNTO 8),DataBus(7 DOWNTO 0),loadingimg,clk,EnableReadingFromCPU1,DecompressionDone1,allz,DecompressedData1);
-i8:jsondecompressor Port Map (reset,DataBus(15 DOWNTO 14),jsoninput,loadingcnn,clk,zed,EnableReadingFromCPU2,DecompressionDone2,DecompressedData2);
+i7:decompressor Port Map(resetimg,DataBus(15 DOWNTO 8),DataBus(7 DOWNTO 0),loadingimg,clk,EnableReadingFromCPU1,DecompressionDone1,allz,DecompressedData1);
+i8:jsondecompressor Port Map (resetcnn,DataBus(15 DOWNTO 14),jsoninput,loadingcnn,clk,zed,EnableReadingFromCPU2,DecompressionDone2,DecompressedData2);
 i9 : MYMUX Generic Map (256) Port Map(DecompressedData1,DecompressedData2,CNNIMGLOAD,DecompressedData);
 end arch;

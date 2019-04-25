@@ -17,6 +17,8 @@ begin
         	elsif LD = '1' then
         	    q <= d;
         	end if;
+	elsif clr = '1' then
+		q <= "00000000";
 	end if;
      end process;
 end a_Reg8;

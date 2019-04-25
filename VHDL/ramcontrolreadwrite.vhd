@@ -19,7 +19,7 @@ begin
 process(loadenable,ProcessEnable,OuterRead,DecompressionDone,OuterWrite)
 begin
 readenable <= (ProcessEnable and OuterRead);
-writeenable <= ((loadenable and DecompressionDone) or (ProcessEnable and OuterWrite));
+writeenable <= ((DecompressionDone) or (ProcessEnable and OuterWrite));
 end process;	
 
 end Behavioral;

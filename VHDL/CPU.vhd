@@ -27,10 +27,10 @@ Cout : OUT std_logic);
 END  Component;
 -------------------------------------- Signal declaration :
 Signal Dummy : std_logic;
-Signal Address : std_logic_vector(9 downto 0);
-Signal nextAddress : std_logic_vector(9 downto 0);
+Signal Address : std_logic_vector(15 downto 0);
+Signal nextAddress : std_logic_vector(15 downto 0);
 begin	
-i0: FULLADDER Generic Map(10) Port Map (Address,"0000000001",'0','1',nextAddress,dummy);
+i0: FULLADDER Generic Map(16) Port Map (Address,"0000000000000001",'0','1',nextAddress,dummy);
 process(CLK, readen , Address) 
 begin
 	if rising_edge(readen) then
@@ -39,11 +39,11 @@ begin
 			Address <= NextAddress;
 		else
 			dataout<="ZZZZZZZZZZZZZZZZ";
-			Address <= "0000000000";
+			Address <= "0000000000000000";
 		end if;
 	elsif (reset = '1') then
 		dataout<="ZZZZZZZZZZZZZZZZ";
-		Address <= "0000000000";
+		Address <= "0000000000000000";
 	else
 		dummy <= dummy;
 	end if;
