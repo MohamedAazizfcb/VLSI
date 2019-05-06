@@ -18,17 +18,6 @@ ResultIn :in std_logic_vector (3 Downto 0);
 CLK,LP,INTR,CNNIMGLOAD,Rst : in std_logic;
 
 
------------------------------------------------
-EnableReadingFromCPU,DecompressionDone : inout std_logic;
-DecompressionDone1,DecompressionDone2 : inout std_logic;
-readenable : inout std_logic;
-DataBus : inout std_logic_vector (15 DOWNTO 0);
-Address : inout std_logic_vector (15 DOWNTO 0);
-DecompressedData,DecompressedData1,DecompressedData2 : inout std_logic_vector(255 Downto 0);
-EnableReadingFromCPU1,EnableReadingFromCPU2: inout std_logic;
-loadingimg,loadingCNN : inout std_logic;
-LDone,loadenable,ProcEn,writeenable : inout std_logic;
-
 
 
 
@@ -36,8 +25,8 @@ LDone,loadenable,ProcEn,writeenable : inout std_logic;
 --OUTPUTS:
 PClk : out std_logic;
 DataFromRam : out std_logic_vector (255 DOWNTO 0);
-Result : inout std_logic_vector(3 Downto 0);
-Done: inout std_logic;
+Result : out std_logic_vector(3 Downto 0);
+Done: out std_logic;
 ProcessEnable : out std_logic);
 
 end IOCHIP;
@@ -142,6 +131,17 @@ end Component;
 Signal toWritetoRam,zed,resetimg,resetcnn : std_logic;
 Signal allz : std_logic_vector(27 downto 0);
 Signal jsoninput : std_logic_vector (15 downto 0);
+Signal EnableReadingFromCPU,DecompressionDone : std_logic;
+Signal DecompressionDone1,DecompressionDone2 : std_logic;
+Signal readenable : std_logic;
+Signal DataBus : std_logic_vector (15 DOWNTO 0);
+Signal Address : std_logic_vector (15 DOWNTO 0);
+Signal DecompressedData,DecompressedData1,DecompressedData2 : std_logic_vector(255 Downto 0);
+Signal EnableReadingFromCPU1,EnableReadingFromCPU2: std_logic;
+Signal loadingimg,loadingCNN : std_logic;
+Signal LDone,loadenable,ProcEn,writeenable : std_logic;
+Signal dum1 : std_logic;
+Signal dum2 : std_logic_vector (3 DOWNTO 0);
 ------------------------------------------------------------------------------------------------------Logic
 begin
 resetimg <= rst or CNNIMGLoad  or LDONe;
@@ -156,7 +156,7 @@ loadingcnn <= loadenable and CNNIMGLOAD;
 EnableReadingFromCPU <= EnableReadingFromCPU2 when CNNIMGLOAD = '1' and loadenable = '1' else EnableReadingFromCPU1 
 	when CNNIMGLOAD = '0' and loadenable = '1' 
 	else '0';
-i:CPU Port Map (Done,rst,clk,Result,EnableReadingFromCPU,DataBus);
+i:CPU Port Map (dum1,rst,clk,dum2,EnableReadingFromCPU,DataBus);
 i0:processenablecircuit Port Map (LP,PDone,INTR,rst,procEn);
 ProcessEnable <= ProcEn;
 i1:loadenablecircuit Port Map (LP,LDone,INTR,rst,loadenable);

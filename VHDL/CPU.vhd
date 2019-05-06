@@ -13,7 +13,7 @@ dataout : out std_logic_vector(15 downto 0)
 end CPU;
 architecture Behavioral of CPU is	
 ------------------------------------- RAM declaration 
-type ramcpu is array(1023 downto 0) of std_logic_vector(15 downto 0);	
+type ramcpu is array(32767 downto 0) of std_logic_vector(15 downto 0);	
 signal ramcpu_1 : ramcpu;	
 ---------------------------------------------------------------------
 ---------------------------------------------------------------------

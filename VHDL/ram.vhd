@@ -15,7 +15,7 @@ end ram;
 
 architecture Behavioral of ram is	
 ------------------------------------- RAM declaration 
-type rama is array(500 downto 0) of std_logic_vector(255 downto 0);	
+type rama is array(32767 downto 0) of std_logic_vector(255 downto 0);	
 signal ram1_1 : rama;	
 -------------------------------------- Signal declaration 
 signal dummy :std_logic;
