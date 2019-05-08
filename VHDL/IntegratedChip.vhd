@@ -55,7 +55,7 @@ Signal ProcessEnable : std_logic;
 
 ---------- FC Signals -------------
 signal FC_init 		: std_logic;   -- signal from CNN to initiate FC
-signal answer		: std_logic_vector(15 downto 0); -- to be changed to 4 bits in FC
+signal FC_result	: std_logic_vector(3 downto 0);
 signal FC_done		: std_logic;
 ----------------------------------
 begin	
@@ -70,7 +70,7 @@ FC: entity work.FC_controller port map(
 				OuterRead,
 				OuterAddress,
 				DataFromRam,
-				answer,
+				FC_result,
 				FC_done
 			);
 

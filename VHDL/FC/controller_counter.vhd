@@ -18,7 +18,7 @@ entity FC_controller is
         address_out     : inout std_logic_vector(address_size - 1 downto 0);
         data_in         : in std_logic_vector(255 downto 0);
 
-        answer    : out std_logic_vector(15 downto 0);
+        answer    : out std_logic_vector(3 downto 0);
         done_comp : inout std_logic
         
         -- memory

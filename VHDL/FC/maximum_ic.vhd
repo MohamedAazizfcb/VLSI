@@ -18,7 +18,7 @@ entity maximum_ic is
         label8_out     : in    std_logic_vector(15 downto 0);
         label9_out     : in    std_logic_vector(15 downto 0);
         label10_out    : in    std_logic_vector(15 downto 0);
-        answer         : out   std_logic_vector(15 downto 0)
+        result         : out   std_logic_vector(3 downto 0)
     );
 end entity maximum_ic;
 
@@ -66,10 +66,8 @@ architecture a_maximum_ic of maximum_ic is
 
   
   signal state : std_logic_vector(3 downto 0);
-  -- idle == 0000
-  -- state_1 == 0001
-  -- ..
 
+  signal answer : std_logic_vector(15 downto 0);
 
   begin
     process(clk,rst)
@@ -79,6 +77,7 @@ architecture a_maximum_ic of maximum_ic is
         start <= '0';
         answer <= (15 downto 0 => '0');
         done_comp <= '0';
+        result <= (3 downto 0 => '0');
 
       elsif(clk'event and clk='1') then
         if start_comp = '1' and start = '0' then
@@ -206,8 +205,49 @@ architecture a_maximum_ic of maximum_ic is
                
             elsif (state = "1000") then
               answer <= comparator_first_output;
-              done_comp <= '1';
-              state <= "0000";
+              state <= "1001";
+            elsif (state = "1001") then
+              if(answer = label1_out) then 
+                result <= "0001";
+                done_comp <= '1';
+                state <= "0000";
+              elsif(answer = label2_out) then
+                result <= "0010";
+                done_comp <= '1';    
+                state <= "0000";
+              elsif(answer = label3_out ) then
+                result <= "0011";
+                done_comp <= '1';  
+                state <= "0000";
+              elsif(answer = label4_out ) then
+                result <= "0100";
+                done_comp <= '1';  
+                state <= "0000";
+              elsif(answer = label5_out ) then
+                result <= "0101";
+                done_comp <= '1';   
+                state <= "0000";
+              elsif(answer = label6_out ) then
+                result <= "0110";
+                done_comp <= '1';   
+                state <= "0000";
+              elsif(answer = label7_out ) then
+                result <= "0111";
+                done_comp <= '1';   
+                state <= "0000";
+              elsif(answer = label8_out ) then 
+                result <= "1000";
+                done_comp <= '1';  
+                state <= "0000";
+              elsif(answer = label9_out ) then
+                result <= "1001";
+                done_comp <= '1';   
+                state <= "0000";
+              elsif(answer = label10_out) then
+                result <= "1010";
+                done_comp <= '1';
+                state <= "0000";
+              end if;   
             else
               state <= "0000";
 	    end if;
