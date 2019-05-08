@@ -152,7 +152,7 @@ Done <= LDone or PDone;
 Result <= Resultin;
 Pclk <= CLK;
 loadingimg <= '1' when loadenable = '1' and CNNIMGLOAD = '0' else '0';
-loadingcnn <= loadenable and CNNIMGLOAD;
+loadingcnn <= '1' when loadenable = '1' and CNNIMGLOAD = '1' else '0';
 EnableReadingFromCPU <= EnableReadingFromCPU2 when CNNIMGLOAD = '1' and loadenable = '1' else EnableReadingFromCPU1 
 	when CNNIMGLOAD = '0' and loadenable = '1' 
 	else '0';

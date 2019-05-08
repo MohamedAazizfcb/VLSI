@@ -67,6 +67,7 @@ signal dummy : std_logic_vector (7 downto 0);
 signal ramWrite : std_logic;
 signal loadenableD : std_logic; 
 signal loadenableRE : std_logic;
+signal tmp1,tmp2 : std_logic;
 begin
 	process(reset,dummy,regcount)
 	begin
@@ -111,9 +112,9 @@ begin
 		  	reset2 <= '0';
 		end if;
 	end process;
-	e1: enable1 <= '1' when (read2 = '0' or start = '1' or (tmp = '1' and reset1 = '1')) and loadenable = '1' else
+	e1: enable1 <= '1' when (read2 = '0' or start = '1' or (tmp1 = '1' and reset1 = '1')) and loadenable = '1' else
 		       '0';
-	e2: enable2 <= '1' when read1 = '0' or start = '1' or (tmp = '1' and reset2 = '1') else
+	e2: enable2 <= '1' when read1 = '0' or start = '1' or (tmp1 = '1' and reset2 = '1') else
 		       '0';
 
 	counttmp <= std_logic_vector( unsigned("000000" & count) + 1 ) when reset1 = '1' else
@@ -125,10 +126,20 @@ begin
 	counter2: DownCounter port map(enable2,regcount,clk,regreset,counterout2);
 	
 	tmp <= '1' when counterout1 = "00000000" and reset1 = '1' and reset2 = '1' else
-		'0' when counterout1 /= "00000001" and counterout2 /= "11111111" else tmp;
-	process(counterout1,tmp,start,count,clk)
+			'0' when counterout1 /= "00000001" and counterout2 /= "11111111" else tmp;
+	process(counterout1,counterout2,reset1,reset2)
 	begin
-		if (counterout1 = "00000001" and tmp /= '1') or start = '1' or count = "00" then
+		if counterout1 = "00000001" and counterout2 = "11111111" and reset1 = '1' and reset2 = '1' then
+			tmp1<= '1';
+		elsif counterout1 /= "00000001" and counterout2 /= "11111111" then
+			tmp1 <= '0';
+		else tmp1 <= tmp1;
+		end if;
+	end process;
+	tmp2 <= '1' when tmp = '1' or tmp1 = '1' else '0';
+	process(counterout1,tmp2,start,count,clk)
+	begin
+		if ((counterout1 = "00000001" and tmp1 /= '1') or (counterout1 = "00000001" and counterout2 = "11111110" and tmp1 = '1')) or start = '1' or count = "00" then
 			if counterout1 /= "00000000" or tmp /= '1' then
 				read1 <= '1';
 			elsif counterout1 /= "00000001" or tmp = '1' then
@@ -142,11 +153,11 @@ begin
 			read1 <= '0';
 		end if;
 	end process;
-	process(counterout2,tmp,start,newline,clk)
+	process(counterout2,tmp2,start,newline,clk)
 	begin
-		if (counterout2 = "11111111" and tmp /= '1') or start = '1' or newline = '1' then
+		if (counterout2 = "11111111" and tmp1 /= '1') or start = '1' or newline = '1' then
 			read2 <= '1';
-		elsif counterout2 /= "11111111" or tmp = '1' then
+		elsif counterout2 /= "11111111" or tmp1 = '1' then
 			if rising_edge(clk) then
 				read2 <= '0';
 			end if;
@@ -155,11 +166,11 @@ begin
 	
 	rd1 : readfile <= read1;
 
-	process(counterout2,tmp,newline,clk)
+	process(counterout2,tmp2,newline,clk)
 	begin
-		if (counterout2 = "11111111" and tmp /= '1') or newline = '1' then
+		if (counterout2 = "11111111" and tmp1 /= '1') or newline = '1' then
 			ramWrite <= '1';
-		elsif counterout2 /= "11111111" or tmp = '1' then
+		elsif counterout2 /= "11111111" or tmp1 = '1' then
 			if rising_edge(clk) then
 				ramWrite <= '0';
 			end if;
