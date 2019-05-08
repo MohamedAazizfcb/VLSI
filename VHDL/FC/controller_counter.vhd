@@ -3,12 +3,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity controller is
+entity FC_controller is
     generic (
         n              : integer := 256;
-        ram_size       : integer := 64;
-        address_size   : integer := 8;
-        label_size     : integer := 8
+        address_size   : integer := 16
     );
     port (
         clk            : in    std_logic; 
@@ -17,7 +15,7 @@ entity controller is
 
         -- IO integration
         enable_read     : out std_logic;
-        address_out     : inout std_logic_vector(7 downto 0);
+        address_out     : inout std_logic_vector(address_size - 1 downto 0);
         data_in         : in std_logic_vector(255 downto 0);
 
         answer    : out std_logic_vector(15 downto 0);
@@ -31,9 +29,9 @@ entity controller is
         --enable_write   : inout std_logic;
         --mdr_data_out   : inout std_logic_vector(255 downto 0);
     );
-end entity controller;
+end entity FC_controller;
 
-architecture a_controller of controller is
+architecture a_FC_controller of FC_controller is
 
     -- decoder signals
     signal sel_dst : std_logic_vector(3 downto 0);
@@ -47,20 +45,20 @@ architecture a_controller of controller is
     
     -- num
     signal enable_num : std_logic;
-    signal num_in : std_logic_vector(7 downto 0);
-    signal num_out : std_logic_vector(7 downto 0);
+    signal num_in : std_logic_vector(15 downto 0);
+    signal num_out : std_logic_vector(15 downto 0);
 
     -- signal enable_null_vec : std_logic;
-    signal null_vec_in : std_logic_vector(7 downto 0);
-    signal null_vec_out : std_logic_vector(7 downto 0);
+    signal null_vec_in : std_logic_vector(15 downto 0);
+    signal null_vec_out : std_logic_vector(15 downto 0);
     
     -- address
     signal enable_address : std_logic;
-    signal address_in  : std_logic_vector(7 downto 0);
+    signal address_in  : std_logic_vector(address_size - 1 downto 0);
 
-    signal alu_inp1  : std_logic_vector(label_size - 1 downto 0);
-    signal alu_inp2  : std_logic_vector(label_size - 1 downto 0);
-    signal alu_out   : std_logic_vector(label_size - 1 downto 0);
+    signal alu_inp1  : std_logic_vector(address_size - 1 downto 0);
+    signal alu_inp2  : std_logic_vector(address_size - 1 downto 0);
+    signal alu_out   : std_logic_vector(address_size - 1 downto 0);
     signal alu_sel   : std_logic;
     signal alu_cin   : std_logic;
     signal alu_cout  : std_logic;
@@ -134,7 +132,7 @@ begin
             enable_address <= '0';
             ready_signal <= '0';
             enable_read <= '0';
-            address_in <= ( 7 downto 0 => '0');
+            address_in <= ( 15 downto 0 => '0');
 
             start_comp <= '0';
 
@@ -159,9 +157,9 @@ begin
                     sel_dst <= "0000"; 
                     enable_read <= '0';
                     enable_decoder_dst <= '0';
-                    address_in <= "00000000";
+                    address_in <= "0000000000000000";
                     enable_num <= '1';
-                    null_vec_in <= (7 downto 0 =>'0');
+                    null_vec_in <= (15 downto 0 =>'0');
                     sub_state <= "001";
                 elsif (sub_state = "001") then
                     sub_state <= "010";
@@ -170,7 +168,7 @@ begin
                 elsif (sub_state = "010") then 
                     sub_state <= "011";
                     alu_inp1 <= address_out;
-                    alu_inp2 <= "00000001";
+                    alu_inp2 <= "0000000000000001";
                     alu_sel <= '0';
                     enable_read <= '0';
                 elsif (sub_state = "011") then
@@ -178,7 +176,7 @@ begin
                     address_in <= alu_out;
                 else
                     sub_state <= "000";
-                    num_in <= data_in(7 downto 0);
+                    num_in <= data_in(15 downto 0);
                     state <= "001";
                 end if;
 
@@ -195,7 +193,7 @@ begin
                     sub_state <= "011";
                     enable_read <= '0';
                     alu_inp1 <= address_out;
-                    alu_inp2 <= "00000001";
+                    alu_inp2 <= "0000000000000001";
                     alu_sel <= '0';
                 elsif (sub_state = "011") then
                     sub_state <= "100";
@@ -236,7 +234,7 @@ begin
                         sub_state <= "010";
                         enable_read <= '1';
                         alu_inp1 <= address_out;
-                        alu_inp2 <= "00000001";
+                        alu_inp2 <= "0000000000000001";
                         alu_sel <= '0';
                     elsif ( sub_state = "010" ) then
                         sub_state <= "011";
@@ -253,7 +251,7 @@ begin
                     enable_read <= '0';
                     enable_decoder_dst <= '0';
                     alu_inp1 <= num_out;
-                    alu_inp2 <= "00000001";
+                    alu_inp2 <= "0000000000000001";
                     alu_cin <= '0';
                     alu_sel <= '1';
                     sub_state <= "001";
@@ -325,11 +323,11 @@ begin
         label_10_output 
     );
 
-    alu_subtractor_adder : entity work.alu generic map ( label_size ) port map ( alu_inp1 , alu_inp2 , alu_sel , alu_cin , alu_out , alu_cout );
+    alu_subtractor_adder : entity work.alu generic map ( 16 ) port map ( alu_inp1 , alu_inp2 , alu_sel , alu_cin , alu_out , alu_cout );
 
     addr: entity work.N_Dff generic map (address_size) port map ( clk , rst , enable_address , address_in , address_out );
-    num : entity work.N_Dff generic map ( 8 ) port map ( clk , rst , enable_num , num_in , num_out );
-    null_vec : entity work.N_Dff generic map ( 8 ) port map ( clk , rst , '0' , null_vec_in , null_vec_out );
+    num : entity work.N_Dff generic map ( 16 ) port map ( clk , rst , enable_num , num_in , num_out );
+    null_vec : entity work.N_Dff generic map ( 16 ) port map ( clk , rst , '0' , null_vec_in , null_vec_out );
      
     booth : entity work.booth_adder_components port map (
         
@@ -417,4 +415,4 @@ begin
     label_10_input <= label_10_input_booth when  enable_decoder_dst_booth = '1' else
     label_10_input_state_machine when enable_decoder_dst = '1';
              
-end a_controller;
+end a_FC_controller;

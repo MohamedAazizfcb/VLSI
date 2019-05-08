@@ -52,9 +52,26 @@ Signal ResultIn : std_logic_vector (3 Downto 0);
 Signal PClk : std_logic;
 Signal DataFromRam : std_logic_vector (255 DOWNTO 0);
 Signal ProcessEnable : std_logic;
+
+---------- FC Signals -------------
+signal FC_init 		: std_logic;   -- signal from CNN to initiate FC
+signal answer		: std_logic_vector(15 downto 0); -- to be changed to 4 bits in FC
+signal FC_done		: std_logic;
+----------------------------------
 begin	
 r0:IOCHIP Port Map (OuterRead,OuterWrite,ActivateOuterAddress,INCEnable,PDone,OuterAddress,ResultIn,
 			CLK,LP,INTR,CNNIMGLOAD,Rst,PClk,
 			DataFromRam,Result,Done,ProcessEnable);
+
+FC: entity work.FC_controller port map(
+				CLK,
+				Rst,
+				FC_init,
+				OuterRead,
+				OuterAddress,
+				DataFromRam,
+				answer,
+				FC_done
+			);
 
 end arch;
