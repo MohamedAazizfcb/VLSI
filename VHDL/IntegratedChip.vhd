@@ -55,8 +55,6 @@ Signal ProcessEnable : std_logic;
 
 ---------- FC Signals -------------
 signal FC_init 		: std_logic;   -- signal from CNN to initiate FC
-signal FC_result	: std_logic_vector(3 downto 0);
-signal FC_done		: std_logic;
 ----------------------------------
 begin	
 r0:IOCHIP Port Map (OuterRead,OuterWrite,ActivateOuterAddress,INCEnable,PDone,OuterAddress,ResultIn,
@@ -70,8 +68,8 @@ FC: entity work.FC_controller port map(
 				OuterRead,
 				OuterAddress,
 				DataFromRam,
-				FC_result,
-				FC_done
+				Result,
+				PDone
 			);
 
 end arch;
