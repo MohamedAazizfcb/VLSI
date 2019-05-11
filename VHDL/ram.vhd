@@ -1,45 +1,42 @@
-library IEEE;	
-use IEEE.STD_LOGIC_1164.ALL;	
-use IEEE.STD_LOGIC_ARITH.ALL;	 
-use IEEE.STD_LOGIC_UNSIGNED.ALL; 
 
-entity ram is	
-Port ( Clk : in std_logic; -- processing clock	
-write_en : in std_logic; -- write enable signal	 
-read_en : in std_logic; -- read enable signal	
-write_address : in std_logic_vector(15 downto 0); -- address to store the data into ram 
-read_address:in std_logic_vector(15 downto 0);-- address to read the data from ram
-data_in : in std_logic_vector(511 downto 0); -- input data to store into ram
-data_out : out std_logic_vector(511 downto 0)); -- output data from memory	
-end ram;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.numeric_std.all;
 
-architecture Behavioral of ram is	
-------------------------------------- RAM declaration 
-type rama is array(32767 downto 0) of std_logic_vector(511 downto 0);	
-signal ram1_1 : rama;	
--------------------------------------- Signal declaration 
-signal dummy :std_logic;
+ENTITY ram IS
+	generic( 
+		ram_size: integer:=65536;
+		bus_width: integer:=512; 
+	   	ram_address_size: integer:=16
+	);
+	
+	PORT(
+		clk : IN std_logic;
+		we  : IN std_logic;
+		re	: IN std_logic;
+		address : IN  std_logic_vector(ram_address_size-1 DOWNTO 0);
+		datain  : IN  std_logic_vector(bus_width-1 DOWNTO 0);
+		dataout : OUT std_logic_vector(bus_width-1 DOWNTO 0);
+		MFC		: OUT std_logic		-- to indicate that ram has finished its job
+	);
+END ENTITY ram;
 
-begin	
+ARCHITECTURE syncrama OF ram IS
 
-process(Clk, write_en) 
-begin
-if rising_edge(write_en) then	-- In this process writing the input data into ram 
-ram1_1(conv_integer(write_address)) <= data_in;
-else
-dummy <= '0';
-end if;	
-end process;	
-
-
-process(Clk, read_en) 
-begin
-if rising_edge(clk) then	
-if read_en = '1' then -- In this process reading the output data from ram 
-data_out <= ram1_1(conv_integer(read_address)); -- Reading the data from RAM
-end if;	
-end if;	
-end process;	
-
-
-end Behavioral;
+	TYPE ram_type IS ARRAY(0 TO ram_size - 1) OF std_logic_vector(bus_width-1 DOWNTO 0);
+	SIGNAL ram : ram_type;
+	
+	BEGIN
+		PROCESS(clk) IS
+			BEGIN
+				IF falling_edge(clk) and we = '1' THEN  
+					ram(to_integer(unsigned(address))) <= datain;
+					MFC <= '1';
+				ELSIF falling_edge(clk) and re = '1' THEN
+					dataout <= ram(to_integer(unsigned(address)));
+					MFC <= '1';
+				ELSE
+					MFC	<= '0';
+				END IF;
+		END PROCESS;
+END syncrama;
