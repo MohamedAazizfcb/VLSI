@@ -1,0 +1,24 @@
+load_library tsmc035_typ
+set_working_dir /home/ayman/Desktop/VLSI/VHDL/FC
+
+read -technology "tsmc035_typ"  { /home/ayman/Desktop/VLSI/VHDL/FC/DFF.vhd /home/ayman/Desktop/VLSI/VHDL/FC/my_nDFF.vhd /home/ayman/Desktop/VLSI/VHDL/FC/shift_reg.vhd /home/ayman/Desktop/VLSI/VHDL/FC/shiftregister_integration.vhd /home/ayman/Desktop/VLSI/VHDL/FC/onebitadder.vhd /home/ayman/Desktop/VLSI/VHDL/FC/nadder.vhd /home/ayman/Desktop/VLSI/VHDL/FC/Twos_Complement.vhd /home/ayman/Desktop/VLSI/VHDL/FC/compare_add_sub.vhd /home/ayman/Desktop/VLSI/VHDL/FC/booth_integration.vhd /home/ayman/Desktop/VLSI/VHDL/FC/booth_adder_components.vhd /home/ayman/Desktop/VLSI/VHDL/FC/D_ff.vhd /home/ayman/Desktop/VLSI/VHDL/FC/N_Dff.vhd /home/ayman/Desktop/VLSI/VHDL/FC/decoder4x16.vhd /home/ayman/Desktop/VLSI/VHDL/FC/label_register_file.vhd /home/ayman/Desktop/VLSI/VHDL/FC/alu.vhd  /home/ayman/Desktop/VLSI/VHDL/FC/comparator.vhd /home/ayman/Desktop/VLSI/VHDL/FC/maximum_ic.vhd /home/ayman/Desktop/VLSI/VHDL/FC/controller_counter.vhd }
+
+pre_optimize -common_logic -unused_logic -boundary -xor_comparator_optimize 
+pre_optimize -extract 
+
+elaborate FC_controller -architecture a_FC_controller 
+set sdf_type combined
+set register2register 10.000000
+set input2register 10.000000
+set register2output 10.000000
+set_clock -name .work.FC_controller.a_FC_controller.clk -clock_cycle "10.000000"
+set_clock -name .work.FC_controller.a_FC_controller.clk -pulse_width "5.000000"
+optimize .work.FC_controller.a_FC_controller -target tsmc035_typ -macro -auto -effort quick -hierarchy flatten 
+optimize_timing .work.FC_controller.a_FC_controller 
+report_area report_area -cell_usage -all_leafs 
+report_delay repot_delay -num_paths 1 -critical_paths -clock_frequency
+set novendor_constraint_file FALSE
+auto_write -format VHDL controller_counter_0.vhd
+set novendor_constraint_file FALSE
+auto_write -format SDF controller_counter.sdf
+
