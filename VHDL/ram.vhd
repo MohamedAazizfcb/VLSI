@@ -42,4 +42,23 @@ end if;
 end process;	
 
 
+  
+  
+--process(Clk, write_en, read_en) 
+ -- begin
+ --   if rising_edge(clk) then	
+--      if read_en = '1' then -- In this process reading the output data from ram 
+--        data_out <= ram1_1(conv_integer(read_address)); -- Reading the data from RAM
+ --       MFC <= '1';
+--      elsif write_en = '1' then
+--        ram1_1(conv_integer(write_address)) <= data_in;
+--        MFC <= '1';
+--      else MFC <= '0';
+--      end if;	
+--    end if;	
+--end process;
+  
+  
+  
+  
 end Behavioral;
