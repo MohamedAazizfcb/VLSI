@@ -54,7 +54,6 @@ Signal
 
 
 --------------CNN Signals----------
-signal CNN_init 	: std_logic;   -- signal from IO to initiate CNN
 signal MFC		: std_logic    --temp
 
 
@@ -91,7 +90,7 @@ CNN: entity work.control_unit port map(
 				OuterWrite,
 				OuterRead,
 				neuron_address,
-				CNN_init,
+				ProcessEnable,
 				FC_init
 			);
 
