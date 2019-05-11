@@ -37,7 +37,6 @@ begin
 if rising_edge(clk) then	
 if read_en = '1' then -- In this process reading the output data from ram 
 data_out <= ram1_1(conv_integer(read_address)); -- Reading the data from RAM
-else data_out<=(Others => 'Z');
 end if;	
 end if;	
 end process;	
