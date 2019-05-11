@@ -50,8 +50,15 @@ Signal PDone : std_logic;
 Signal OuterAddress : std_logic_vector(15 DOWNTO 0);
 Signal ResultIn : std_logic_vector (3 Downto 0);
 Signal PClk : std_logic;
-Signal DataFromRam : std_logic_vector (255 DOWNTO 0);
+Signal DataFromRam, DataToRam : std_logic_vector (511 DOWNTO 0); -- added
 Signal ProcessEnable : std_logic;
+
+
+
+--------------CNN Signals----------
+signal CNN_init 	: std_logic;   -- signal from IO to initiate CNN
+signal MFC		: std_logic    --temp
+
 
 ---------- FC Signals -------------
 signal FC_init 			: std_logic;   -- signal from CNN to initiate FC
@@ -74,6 +81,20 @@ FC: entity work.FC_controller port map(
 				Result,
 				PDone,
 				neuron_address
+			);
+	
+	
+CNN: entity work.control_unit port map(
+				CLK,
+				MFC, --added
+				DataFromRam,
+				DataToRam, -- added
+				OuterAddress,
+				OuterWrite,
+				OuterRead,
+				neuron_address,
+				CNN_init,
+				FC_init
 			);
 
 end arch;
