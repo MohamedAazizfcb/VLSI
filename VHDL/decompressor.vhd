@@ -28,7 +28,7 @@ component decoder_5to28 is
            q  : out STD_LOGIC_VECTOR (27 downto 0));                    
 end component;
 
-component Reg16 is
+component Reg8 is
   port (enable : in std_logic := '0';
 	d : in std_logic_vector(15 downto 0);
 	clr,LD : in std_logic := '0';
@@ -39,6 +39,7 @@ signal reset1, reset2 : std_logic;
 signal enable1, enable2 : std_logic;
 signal read1, read2 : std_logic;
 signal counterout1, counterout2 : std_logic_vector (7 downto 0);
+Signal Zeroes : std_logic_vector(63 DOWNTO 0) := (Others=> '0');
 signal regcount : std_logic_vector (7 downto 0);
 signal count1 :  std_logic_vector (7 downto 0);
 signal Regout1 : std_logic_vector (15 downto 0);
@@ -175,35 +176,35 @@ begin
 	regreset <= reset2 or reset;
 	decoder: decoder_5to28 port map(counterout2(4 downto 0),loadenable,decoderout);
 	
-	r1: Reg16 port map(enable2,pValue,regreset,decoderout(0),regout1);
-	r2: Reg16 port map(enable2,pValue,regreset,decoderout(1),regout2);
-	r3: Reg16 port map(enable2,pValue,regreset,decoderout(2),regout3);
-	r4: Reg16 port map(enable2,pValue,regreset,decoderout(3),regout4);
-	r5: Reg16 port map(enable2,pValue,regreset,decoderout(4),regout5);
-	r6: Reg16 port map(enable2,pValue,regreset,decoderout(5),regout6);
-	r7: Reg16 port map(enable2,pValue,regreset,decoderout(6),regout7);
-	r8: Reg16 port map(enable2,pValue,regreset,decoderout(7),regout8);
-	r9: Reg16 port map(enable2,pValue,regreset,decoderout(8),regout9);
-	r10: Reg16 port map(enable2,pValue,regreset,decoderout(9),regout10);
-	r11: Reg16 port map(enable2,pValue,regreset,decoderout(10),regout11);
-	r12: Reg16 port map(enable2,pValue,regreset,decoderout(11),regout12);
-	r13: Reg16 port map(enable2,pValue,regreset,decoderout(12),regout13);
-	r14: Reg16 port map(enable2,pValue,regreset,decoderout(13),regout14);
-	r15: Reg16 port map(enable2,pValue,regreset,decoderout(14),regout15);
-	r16: Reg16 port map(enable2,pValue,regreset,decoderout(15),regout16);
-	r17: Reg16 port map(enable2,pValue,regreset,decoderout(16),regout17);
-	r18: Reg16 port map(enable2,pValue,regreset,decoderout(17),regout18);
-	r19: Reg16 port map(enable2,pValue,regreset,decoderout(18),regout19);
-	r20: Reg16 port map(enable2,pValue,regreset,decoderout(19),regout20);
-	r21: Reg16 port map(enable2,pValue,regreset,decoderout(20),regout21);
-	r22: Reg16 port map(enable2,pValue,regreset,decoderout(21),regout22);
-	r23: Reg16 port map(enable2,pValue,regreset,decoderout(22),regout23);
-	r24: Reg16 port map(enable2,pValue,regreset,decoderout(23),regout24);
-	r25: Reg16 port map(enable2,pValue,regreset,decoderout(24),regout25);
-	r26: Reg16 port map(enable2,pValue,regreset,decoderout(25),regout26);
-	r27: Reg16 port map(enable2,pValue,regreset,decoderout(26),regout27);
-	r28: Reg16 port map(enable2,pValue,regreset,decoderout(27),regout28);
+	r1: Reg8 port map(enable2,pValue,regreset,decoderout(0),regout1);
+	r2: Reg8 port map(enable2,pValue,regreset,decoderout(1),regout2);
+	r3: Reg8 port map(enable2,pValue,regreset,decoderout(2),regout3);
+	r4: Reg8 port map(enable2,pValue,regreset,decoderout(3),regout4);
+	r5: Reg8 port map(enable2,pValue,regreset,decoderout(4),regout5);
+	r6: Reg8 port map(enable2,pValue,regreset,decoderout(5),regout6);
+	r7: Reg8 port map(enable2,pValue,regreset,decoderout(6),regout7);
+	r8: Reg8 port map(enable2,pValue,regreset,decoderout(7),regout8);
+	r9: Reg8 port map(enable2,pValue,regreset,decoderout(8),regout9);
+	r10: Reg8 port map(enable2,pValue,regreset,decoderout(9),regout10);
+	r11: Reg8 port map(enable2,pValue,regreset,decoderout(10),regout11);
+	r12: Reg8 port map(enable2,pValue,regreset,decoderout(11),regout12);
+	r13: Reg8 port map(enable2,pValue,regreset,decoderout(12),regout13);
+	r14: Reg8 port map(enable2,pValue,regreset,decoderout(13),regout14);
+	r15: Reg8 port map(enable2,pValue,regreset,decoderout(14),regout15);
+	r16: Reg8 port map(enable2,pValue,regreset,decoderout(15),regout16);
+	r17: Reg8 port map(enable2,pValue,regreset,decoderout(16),regout17);
+	r18: Reg8 port map(enable2,pValue,regreset,decoderout(17),regout18);
+	r19: Reg8 port map(enable2,pValue,regreset,decoderout(18),regout19);
+	r20: Reg8 port map(enable2,pValue,regreset,decoderout(19),regout20);
+	r21: Reg8 port map(enable2,pValue,regreset,decoderout(20),regout21);
+	r22: Reg8 port map(enable2,pValue,regreset,decoderout(21),regout22);
+	r23: Reg8 port map(enable2,pValue,regreset,decoderout(22),regout23);
+	r24: Reg8 port map(enable2,pValue,regreset,decoderout(23),regout24);
+	r25: Reg8 port map(enable2,pValue,regreset,decoderout(24),regout25);
+	r26: Reg8 port map(enable2,pValue,regreset,decoderout(25),regout26);
+	r27: Reg8 port map(enable2,pValue,regreset,decoderout(26),regout27);
+	r28: Reg8 port map(enable2,pValue,regreset,decoderout(27),regout28);
 
-	output : imout <= "0000000000000000000000000000000000000000000000000000000000000000" & regout1 & regout2 & regout3 & regout4 & regout5 & regout6 & regout7 & regout8 & regout9 & regout10 & regout11 & regout12 & regout13 & regout14 & regout15 & regout16 & regout17 & regout18 & regout19 & regout20 & regout21 & regout22 & regout23 & regout24 & regout25 & regout26 & regout27 & regout28;
+	output : imout <= Zeroes & regout1 & regout2 & regout3 & regout4 & regout5 & regout6 & regout7 & regout8 & regout9 & regout10 & regout11 & regout12 & regout13 & regout14 & regout15 & regout16 & regout17 & regout18 & regout19 & regout20 & regout21 & regout22 & regout23 & regout24 & regout25 & regout26 & regout27 & regout28;
 
 end a_decompressor;

@@ -14,7 +14,7 @@ ActivateOuterAddress : in std_logic;
 INCEnable : in std_logic;
 PDone : in std_logic;
 OuterAddress : in std_logic_vector(15 DOWNTO 0);
-ResultIn :in std_logic_vector (3 Downto 0);
+OuterData : in std_logic_vector(511 DOWNTO 0);
 CLK,LP,INTR,CNNIMGLOAD,Rst : in std_logic;
 
 
@@ -23,11 +23,10 @@ CLK,LP,INTR,CNNIMGLOAD,Rst : in std_logic;
 
 -----------------------------------------------
 --OUTPUTS:
-PClk : out std_logic;
-DataFromRam : out std_logic_vector (255 DOWNTO 0);
-Result : out std_logic_vector(3 Downto 0);
+DataFromRam : out std_logic_vector (511 DOWNTO 0);
 Done: out std_logic;
-ProcessEnable : out std_logic);
+ProcessEnable : out std_logic;
+MFC : out std_logic);
 
 end IOCHIP;
 
@@ -82,7 +81,8 @@ Address : in std_logic_vector(15 Downto 0);
 readenable : in std_logic;
 writeenable : in std_logic;
 CLK : in std_logic;
-DataOut : out std_logic_vector (511 DOWNTO 0));
+DataOut : out std_logic_vector (511 DOWNTO 0);
+MFC : out std_logic);
 end Component;
 ----------------------------------------------
 Component ADDRESSGENERATOR is	
@@ -143,14 +143,15 @@ Signal LDone,loadenable,ProcEn,writeenable : std_logic;
 Signal dum1 : std_logic;
 Signal dum2 : std_logic_vector (3 DOWNTO 0);
 Signal val1 : std_logic_vector (15 Downto 0);
+Signal FinalDataToRam : std_logic_vector(511 DOWNTO 0);
 ------------------------------------------------------------------------------------------------------Logic
 begin
 resetimg <= rst or CNNIMGLoad  or LDONe;
 resetcnn <= rst or (not(CNNIMGLoad))or LDone;
+FinalDataToRam <= OuterData when OuterWrite = '1' else DecompressedData;
 --toWritetoRam <= DecompressionDone1 or DecompressionDone2 or writeenable ;
 DecompressionDone<=DecompressionDone1 or DecompressionDone2;
 Done <= LDone or PDone;
-Result <= Resultin;
 Pclk <= CLK;
 loadingimg <= '1' when loadenable = '1' and CNNIMGLOAD = '0' else '0';
 loadingcnn <= '1' when loadenable = '1' and CNNIMGLOAD = '1' else '0';
@@ -163,7 +164,7 @@ ProcessEnable <= ProcEn;
 i1:loadenablecircuit Port Map (LP,LDone,INTR,rst,loadenable);
 i2:LDONEcircuit Port Map (DataBus,LoadEnable,loadingcnn,LDONE);
 i3:ramenablereadwrite Port Map (loadenable,DecompressionDone,ProcEn,OuterWrite,OuterRead,readenable,toWritetoRam);
-i4:RamControl Port Map (DecompressedData,Address,readenable,toWritetoRam,CLK,DataFromRam);
+i4:RamControl Port Map (FinalDataToRam,Address,readenable,toWritetoRam,CLK,DataFromRam,MFC);
 i5:ADDRESSGENERATOR Port Map (Rst,CLK,LoadEnable,toWritetoRam,ProcEn,IncEnable,OuterAddress,ActivateOuterAddress,Address);
 jsoninput <= DataBus(13) & DataBus(13) & DataBus(13 DOWNTO 0);
 zed <= 'Z';
@@ -171,5 +172,5 @@ allz <= "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
 val1 <= '0'&DataBus(7 DOWNTO 0)&"0000000";
 i7:decompressor Port Map(resetimg,DataBus(15 DOWNTO 8),val1,loadingimg,clk,EnableReadingFromCPU1,DecompressionDone1,allz,DecompressedData1);
 i8:jsondecompressor Port Map (resetcnn,DataBus(15 DOWNTO 14),jsoninput,loadingcnn,clk,zed,EnableReadingFromCPU2,DecompressionDone2,DecompressedData2);
-i9 : MYMUX Generic Map (256) Port Map(DecompressedData1,DecompressedData2,CNNIMGLOAD,DecompressedData);
+i9 : MYMUX Generic Map (512) Port Map(DecompressedData1,DecompressedData2,CNNIMGLOAD,DecompressedData);
 end arch;

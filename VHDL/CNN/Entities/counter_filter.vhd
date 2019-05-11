@@ -11,7 +11,7 @@ generic ( n : integer := 16);
 end up_counter_top_filter;
 
 architecture Behavioral of up_counter_top_filter is
-    signal count   : STD_LOGIC_VECTOR (n-1 downto 0) := "0000000000000000";
+    signal count   : STD_LOGIC_VECTOR (n-1 downto 0) := "0000000000000001";
 begin
     --count<= ;
     process (CLK)
@@ -23,7 +23,7 @@ begin
 		end if;
 	end if;
         if (reset = '1' or flag = '1') then
-                count<= "0000000000000000";
+                count<= "0000000000000001";
         end if;
 
     end process;
