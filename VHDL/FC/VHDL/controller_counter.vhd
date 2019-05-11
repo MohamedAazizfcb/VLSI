@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 
 entity FC_controller is
     generic (
-        n              : integer := 256;
+        n              : integer := 512;
         address_size   : integer := 16
     );
     port (
@@ -16,7 +16,7 @@ entity FC_controller is
         -- IO integration
         enable_read     : out std_logic;
         address_out     : inout std_logic_vector(address_size - 1 downto 0);
-        data_in         : in std_logic_vector(255 downto 0);
+        data_in         : in std_logic_vector(511 downto 0);
 
         answer    : out std_logic_vector(3 downto 0);
         done_comp : inout std_logic;
