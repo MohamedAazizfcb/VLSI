@@ -10,7 +10,7 @@ entity decompressor is
 	clk : in std_logic;
 	readfile,readtoRam: out std_logic;
 	decoderout : inout std_logic_vector (27 downto 0);
-	imout : out std_logic_vector (511 downto 0));
+	imout : out std_logic_vector (255 downto 0));
 end;
 
 architecture a_decompressor of decompressor is

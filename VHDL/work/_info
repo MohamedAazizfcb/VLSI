@@ -1,0 +1,998 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Mohamed Aaziz/VLSI/VHDL
+Eaddressgenerator
+Z1 w1557591365
+Z2 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z3 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z5 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z6 8C:/Users/Mohamed Aaziz/VLSI/VHDL/AddressGenerator.vhd
+Z7 FC:/Users/Mohamed Aaziz/VLSI/VHDL/AddressGenerator.vhd
+l0
+L6
+VF>?LB>UI95dNiPHAl@fh51
+!s100 Oz8eH7iPmICXOb?YEdFP[3
+Z8 OV;C;10.5b;63
+32
+Z9 !s110 1557591471
+!i10b 1
+Z10 !s108 1557591471.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/AddressGenerator.vhd|
+Z12 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/AddressGenerator.vhd|
+!i113 1
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1 CvgOpt 0
+Aarch
+R2
+R3
+R4
+R5
+DEx4 work 16 addressgenerator 0 22 F>?LB>UI95dNiPHAl@fh51
+l57
+L18
+Vi:GZ>E:5Rf50@BP>Q;aP63
+!s100 J:c4ezAMW]lENI@BV5HF71
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Ebitadder
+R1
+R4
+R5
+R0
+Z15 8C:/Users/Mohamed Aaziz/VLSI/VHDL/bitadder.vhd
+Z16 FC:/Users/Mohamed Aaziz/VLSI/VHDL/bitadder.vhd
+l0
+L4
+Vj==ag4G4Q9:f]m>XcGg=;0
+!s100 85@>X`5bQEE<479V^`2S:3
+R8
+32
+R9
+!i10b 1
+R10
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/bitadder.vhd|
+Z18 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/bitadder.vhd|
+!i113 1
+R13
+R14
+Adataflow_fulladder
+R4
+R5
+DEx4 work 8 bitadder 0 22 j==ag4G4Q9:f]m>XcGg=;0
+l11
+L10
+VUVH89]2fb=bz2EjT`8i1_3
+!s100 7GcGM0@3N;NzDkOO9oGTP2
+R8
+32
+R9
+!i10b 1
+R10
+R17
+R18
+!i113 1
+R13
+R14
+Ecpu
+R1
+R2
+R3
+R4
+R5
+R0
+Z19 8C:/Users/Mohamed Aaziz/VLSI/VHDL/CPU.vhd
+Z20 FC:/Users/Mohamed Aaziz/VLSI/VHDL/CPU.vhd
+l0
+L6
+VN@cd[zzzmWzTM>8c8amcJ3
+!s100 b@S`feN9Q`EO;bBE1Vfjm0
+R8
+32
+Z21 !s110 1557591472
+!i10b 1
+Z22 !s108 1557591472.000000
+Z23 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/CPU.vhd|
+Z24 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/CPU.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 3 cpu 0 22 N@cd[zzzmWzTM>8c8amcJ3
+l32
+L14
+V_cO95^]UA904?6g]<;7;@3
+!s100 3d1o3DMzg:nkD6HdAB>`50
+R8
+32
+R21
+!i10b 1
+R22
+R23
+R24
+!i113 1
+R13
+R14
+Edecoder_4to16
+R1
+R4
+R5
+R0
+Z25 8C:/Users/Mohamed Aaziz/VLSI/VHDL/decoder_4to16.vhd
+Z26 FC:/Users/Mohamed Aaziz/VLSI/VHDL/decoder_4to16.vhd
+l0
+L4
+VJQO7h;jXZC@<:;`=<fK9F2
+!s100 cf:8>WgeD:SQ=T`@dFbJK1
+R8
+32
+R21
+!i10b 1
+R22
+Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/decoder_4to16.vhd|
+Z28 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/decoder_4to16.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R4
+R5
+DEx4 work 13 decoder_4to16 0 22 JQO7h;jXZC@<:;`=<fK9F2
+l11
+L10
+ViIQPHRk^UZNf1Z79YTV2b0
+!s100 @^1@5:_ZQbICi;c@3mVF:0
+R8
+32
+R21
+!i10b 1
+R22
+R27
+R28
+!i113 1
+R13
+R14
+Edecoder_5to28
+R1
+R4
+R5
+R0
+Z29 8C:/Users/Mohamed Aaziz/VLSI/VHDL/decoder_5to32.vhd
+Z30 FC:/Users/Mohamed Aaziz/VLSI/VHDL/decoder_5to32.vhd
+l0
+L4
+Vik>fi0Dnm=XYT`]>H8YkY2
+!s100 hEH6fJ^dld@aDC_jmAM5i2
+R8
+32
+R21
+!i10b 1
+R22
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/decoder_5to32.vhd|
+Z32 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/decoder_5to32.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R4
+R5
+DEx4 work 13 decoder_5to28 0 22 ik>fi0Dnm=XYT`]>H8YkY2
+l11
+L10
+VRl^_GNY]VYnG7191go`UW3
+!s100 1^G[>BR8<YSkW9[Pf9FEH2
+R8
+32
+R21
+!i10b 1
+R22
+R31
+R32
+!i113 1
+R13
+R14
+Edecompressor
+R1
+Z33 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+R4
+R5
+R0
+Z34 8C:/Users/Mohamed Aaziz/VLSI/VHDL/decompressor.vhd
+Z35 FC:/Users/Mohamed Aaziz/VLSI/VHDL/decompressor.vhd
+l0
+L5
+V<7Sm]OZ[BjNd95^lN`8bE0
+!s100 PifZ=OPJCN27a;<W>4V8A2
+R8
+32
+R21
+!i10b 1
+R22
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/decompressor.vhd|
+Z37 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/decompressor.vhd|
+!i113 1
+R13
+R14
+Aa_decompressor
+R33
+R4
+R5
+DEx4 work 12 decompressor 0 22 <7Sm]OZ[BjNd95^lN`8bE0
+l78
+L16
+VPMESVE:dDWkZz4>FNY:Ec1
+!s100 0E8gzg3>^1QEf`fXTah2d3
+R8
+32
+R21
+!i10b 1
+R22
+R36
+R37
+!i113 1
+R13
+R14
+Edff
+R1
+R2
+R3
+R4
+R5
+R0
+Z38 8C:/Users/Mohamed Aaziz/VLSI/VHDL/Dff.vhd
+Z39 FC:/Users/Mohamed Aaziz/VLSI/VHDL/Dff.vhd
+l0
+L6
+VEjbYURNMMd2_DKoQ?HUC=1
+!s100 <b1NhM;P<lES>l<LNHBDf1
+R8
+32
+R21
+!i10b 1
+R22
+Z40 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/Dff.vhd|
+Z41 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/Dff.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 3 dff 0 22 EjbYURNMMd2_DKoQ?HUC=1
+l12
+L11
+VS6ojc4VOSGXU8A0[UE[N82
+!s100 [iDiRe^^HFDUXf5CMR17Y0
+R8
+32
+R21
+!i10b 1
+R22
+R40
+R41
+!i113 1
+R13
+R14
+Edflipfl
+R1
+R2
+R3
+R4
+R5
+R0
+Z42 8C:/Users/Mohamed Aaziz/VLSI/VHDL/DFLIPFL.vhd
+Z43 FC:/Users/Mohamed Aaziz/VLSI/VHDL/DFLIPFL.vhd
+l0
+L6
+VM<m>c[UfgP;;;3;O1KHD82
+!s100 XOo0AA[PGe_:lD0Jkh^Vj3
+R8
+32
+R21
+!i10b 1
+R22
+Z44 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/DFLIPFL.vhd|
+Z45 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/DFLIPFL.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 7 dflipfl 0 22 M<m>c[UfgP;;;3;O1KHD82
+l12
+L11
+Vk4]GG_<fnoPW6];FEScaB2
+!s100 `cOL=Y9R?M9e>Ge=8e1_80
+R8
+32
+R21
+!i10b 1
+R22
+R44
+R45
+!i113 1
+R13
+R14
+Edowncounter
+R1
+R3
+R2
+R4
+R5
+R0
+Z46 8C:/Users/Mohamed Aaziz/VLSI/VHDL/counter.vhd
+Z47 FC:/Users/Mohamed Aaziz/VLSI/VHDL/counter.vhd
+l0
+L4
+Vkn5<e4UBCY6LA6iLazCiQ2
+!s100 aHKm3OY_@7i4b0>3Jmn[40
+R8
+32
+R21
+!i10b 1
+R10
+Z48 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/counter.vhd|
+Z49 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/counter.vhd|
+!i113 1
+R13
+R14
+Aa_downcounter
+R3
+R2
+R4
+R5
+DEx4 work 11 downcounter 0 22 kn5<e4UBCY6LA6iLazCiQ2
+l13
+L11
+VH7L1fD0U0[eYIfa5T[L4D1
+!s100 eVThYz5Vdnm9GQ<E><kfI0
+R8
+32
+R21
+!i10b 1
+R10
+R48
+R49
+!i113 1
+R13
+R14
+Efulladder
+R1
+R4
+R5
+R0
+Z50 8C:/Users/Mohamed Aaziz/VLSI/VHDL/FullAdder.vhd
+Z51 FC:/Users/Mohamed Aaziz/VLSI/VHDL/FullAdder.vhd
+l0
+L3
+V4TINDS;39lNlXzE`IEz2H3
+!s100 5L=mGM>g[6kDOY5k>:7T43
+R8
+32
+Z52 !s110 1557591473
+!i10b 1
+R22
+Z53 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/FullAdder.vhd|
+Z54 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/FullAdder.vhd|
+!i113 1
+R13
+R14
+Astruct_nadder
+R4
+R5
+DEx4 work 9 fulladder 0 22 4TINDS;39lNlXzE`IEz2H3
+l20
+L11
+V6@NmS=di13ko`Sz=N69Di2
+!s100 8Ye>6NS55P=FRMJG`zFmT0
+R8
+32
+R52
+!i10b 1
+R22
+R53
+R54
+!i113 1
+R13
+R14
+Eintegratedchip
+R1
+R2
+R3
+R4
+R5
+R0
+8C:/Users/Mohamed Aaziz/VLSI/VHDL/IntegratedChip.vhd
+FC:/Users/Mohamed Aaziz/VLSI/VHDL/IntegratedChip.vhd
+l0
+L6
+VK]E;kV:2T@1;Wh2fWha0_3
+!s100 o0ZI5TjRc^g>YVC[:i3g32
+R8
+32
+R52
+!i10b 1
+Z55 !s108 1557591473.000000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/IntegratedChip.vhd|
+!s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/IntegratedChip.vhd|
+!i113 1
+R13
+R14
+Eiochip
+Z56 w1557591785
+R2
+R3
+R4
+R5
+R0
+Z57 8C:/Users/Mohamed Aaziz/VLSI/VHDL/IOChip.vhd
+Z58 FC:/Users/Mohamed Aaziz/VLSI/VHDL/IOChip.vhd
+l0
+L8
+Vizk;adb>NjjEehAM>W]UU2
+!s100 f0[jh7]J[6Z[5DAXF51:G0
+R8
+32
+Z59 !s110 1557591788
+!i10b 1
+Z60 !s108 1557591788.000000
+Z61 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/IOChip.vhd|
+Z62 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/IOChip.vhd|
+!i113 1
+R13
+R14
+Aarch
+R2
+R3
+R4
+R5
+DEx4 work 6 iochip 0 22 izk;adb>NjjEehAM>W]UU2
+l147
+L34
+V4i[LbnQC<4?og<X@l3`Q41
+!s100 ?E`IXX8Mhi<[48`;]B7ZG0
+R8
+32
+R59
+!i10b 1
+R60
+R61
+R62
+!i113 1
+R13
+R14
+Ejsondecompressor
+Z63 w1557591932
+R33
+R4
+R5
+R0
+Z64 8C:/Users/Mohamed Aaziz/VLSI/VHDL/jsondecompressor.vhd
+Z65 FC:/Users/Mohamed Aaziz/VLSI/VHDL/jsondecompressor.vhd
+l0
+L5
+V<=]^ihKA]mJZX:FPP?=fY2
+!s100 RIaEAc];<GfNBD[4e0LQQ0
+R8
+32
+Z66 !s110 1557591936
+!i10b 1
+Z67 !s108 1557591936.000000
+Z68 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/jsondecompressor.vhd|
+Z69 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/jsondecompressor.vhd|
+!i113 1
+R13
+R14
+Aa_jsondecompressor
+R33
+R4
+R5
+Z70 DEx4 work 16 jsondecompressor 0 22 <=]^ihKA]mJZX:FPP?=fY2
+l71
+L16
+Z71 VPdA1d@<O_kUD>nnd;1<]53
+Z72 !s100 <MCagAh0COJ0eC8K^zmh:2
+R8
+32
+R66
+!i10b 1
+R67
+R68
+R69
+!i113 1
+R13
+R14
+Eldonecircuit
+R1
+R2
+R3
+R4
+R5
+R0
+Z73 8C:/Users/Mohamed Aaziz/VLSI/VHDL/LDONECircuit.vhd
+Z74 FC:/Users/Mohamed Aaziz/VLSI/VHDL/LDONECircuit.vhd
+l0
+L6
+Vb3m<^dPzg@nLWJgQ>NPI[1
+!s100 bBLJ0UKdW31<PU`ocYGll0
+R8
+32
+R52
+!i10b 1
+R55
+Z75 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/LDONECircuit.vhd|
+Z76 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/LDONECircuit.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 12 ldonecircuit 0 22 b3m<^dPzg@nLWJgQ>NPI[1
+l14
+L13
+V]6@`[5LQebkEg]T8h;f?E3
+!s100 o3MYbYUPJSk^;e2Xc^k2j0
+R8
+32
+R52
+!i10b 1
+R55
+R75
+R76
+!i113 1
+R13
+R14
+Eloadenablecircuit
+R1
+R2
+R3
+R4
+R5
+R0
+Z77 8C:/Users/Mohamed Aaziz/VLSI/VHDL/loadenablecircuit.vhd
+Z78 FC:/Users/Mohamed Aaziz/VLSI/VHDL/loadenablecircuit.vhd
+l0
+L6
+VfgCo8U3BOZ[>DQKZ]a^iS0
+!s100 4feOIcD5V;9F<OaZ[^<LP3
+R8
+32
+R52
+!i10b 1
+R55
+Z79 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/loadenablecircuit.vhd|
+Z80 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/loadenablecircuit.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 17 loadenablecircuit 0 22 fgCo8U3BOZ[>DQKZ]a^iS0
+l21
+L14
+VHN6`@lk8Y0EB;g?fY<cgC3
+!s100 WGVI=E2TPY`KR4H5PZ^nR1
+R8
+32
+R52
+!i10b 1
+R55
+R79
+R80
+!i113 1
+R13
+R14
+Emux2
+R1
+R2
+R3
+R4
+R5
+R0
+Z81 8C:/Users/Mohamed Aaziz/VLSI/VHDL/MUX2.vhd
+Z82 FC:/Users/Mohamed Aaziz/VLSI/VHDL/MUX2.vhd
+l0
+L6
+Vf75Nbbg3zYhHbh5]ET7gP0
+!s100 :>UJWZ^2N>z@CIAG9be>B3
+R8
+32
+R52
+!i10b 1
+R55
+Z83 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/MUX2.vhd|
+Z84 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/MUX2.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 4 mux2 0 22 f75Nbbg3zYhHbh5]ET7gP0
+l16
+L15
+VI`ceeLRFTBO0Gb8lDB;U43
+!s100 Fb8kQmnZ3?Y1_960S^>3H3
+R8
+32
+R52
+!i10b 1
+R55
+R83
+R84
+!i113 1
+R13
+R14
+Emymux
+R1
+R2
+R3
+R4
+R5
+R0
+Z85 8C:/Users/Mohamed Aaziz/VLSI/VHDL/MYMUX.vhd
+Z86 FC:/Users/Mohamed Aaziz/VLSI/VHDL/MYMUX.vhd
+l0
+L6
+V?T6aIzR[dG6XXgC?;oKHM2
+!s100 SMh=dCN4mQcKN[>FU<=9V0
+R8
+32
+R52
+!i10b 1
+R55
+Z87 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/MYMUX.vhd|
+Z88 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/MYMUX.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 5 mymux 0 22 ?T6aIzR[dG6XXgC?;oKHM2
+l16
+L15
+V[IYJ_P]Jo9E@:Tz7IGz<c2
+!s100 8BKEdgcmh_Rae[5W7GGZI0
+R8
+32
+R52
+!i10b 1
+R55
+R87
+R88
+!i113 1
+R13
+R14
+Eprocessenablecircuit
+R1
+R2
+R3
+R4
+R5
+R0
+Z89 8C:/Users/Mohamed Aaziz/VLSI/VHDL/processenablecircuit.vhd
+Z90 FC:/Users/Mohamed Aaziz/VLSI/VHDL/processenablecircuit.vhd
+l0
+L7
+VELnO0F8]08g1EKRI0M[F>0
+!s100 Ab>YiAa8aCZ8bZG`1NfRC0
+R8
+32
+Z91 !s110 1557591474
+!i10b 1
+R55
+Z92 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/processenablecircuit.vhd|
+Z93 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/processenablecircuit.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 20 processenablecircuit 0 22 ELnO0F8]08g1EKRI0M[F>0
+l22
+L15
+VQCkPo>`Wnb@mCW5ElhPGb0
+!s100 S@3_W1Cl79QKzlB]?:eFk0
+R8
+32
+R91
+!i10b 1
+R55
+R92
+R93
+!i113 1
+R13
+R14
+Eram
+Z94 w1557591677
+R2
+R3
+R4
+R5
+R0
+Z95 8C:/Users/Mohamed Aaziz/VLSI/VHDL/ram.vhd
+Z96 FC:/Users/Mohamed Aaziz/VLSI/VHDL/ram.vhd
+l0
+L6
+VbWiIa5:IK8R[_Z4kSUO]H1
+!s100 RE6a:[8:glV_=gkWVI@_j2
+R8
+32
+Z97 !s110 1557591680
+!i10b 1
+Z98 !s108 1557591680.000000
+Z99 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/ram.vhd|
+Z100 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/ram.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 3 ram 0 22 bWiIa5:IK8R[_Z4kSUO]H1
+l23
+L16
+VUSe`j561An;Vb]SfIDXoL1
+!s100 gJkE;k`X^UdZZ7[`F6WUV3
+R8
+32
+R97
+!i10b 1
+R98
+R99
+R100
+!i113 1
+R13
+R14
+Eramcontrol
+Z101 w1557591701
+R2
+R3
+R4
+R5
+R0
+Z102 8C:/Users/Mohamed Aaziz/VLSI/VHDL/RamControl.vhd
+Z103 FC:/Users/Mohamed Aaziz/VLSI/VHDL/RamControl.vhd
+l0
+L6
+V7z@WOcX_z907TXmJ4^D:H0
+!s100 HSn4P_j4gWGhhaKU>4Rk83
+R8
+32
+Z104 !s110 1557591704
+!i10b 1
+Z105 !s108 1557591704.000000
+Z106 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/RamControl.vhd|
+Z107 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/RamControl.vhd|
+!i113 1
+R13
+R14
+Aarch
+R2
+R3
+R4
+R5
+DEx4 work 10 ramcontrol 0 22 7z@WOcX_z907TXmJ4^D:H0
+l26
+L16
+VD<EU1N1?:g3hQa;?^;=n:1
+!s100 Znn:^7V6>]COOmKSUZeAQ3
+R8
+32
+R104
+!i10b 1
+R105
+R106
+R107
+!i113 1
+R13
+R14
+Eramenablereadwrite
+R1
+R2
+R3
+R4
+R5
+R0
+Z108 8C:/Users/Mohamed Aaziz/VLSI/VHDL/ramcontrolreadwrite.vhd
+Z109 FC:/Users/Mohamed Aaziz/VLSI/VHDL/ramcontrolreadwrite.vhd
+l0
+L6
+V3a<99gIHm`BS3c`J0I36;2
+!s100 =4jR1AbH<@l_K@7WR4I9]0
+R8
+32
+R91
+!i10b 1
+Z110 !s108 1557591474.000000
+Z111 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/ramcontrolreadwrite.vhd|
+Z112 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/ramcontrolreadwrite.vhd|
+!i113 1
+R13
+R14
+Abehavioral
+R2
+R3
+R4
+R5
+DEx4 work 18 ramenablereadwrite 0 22 3a<99gIHm`BS3c`J0I36;2
+l17
+L16
+VkXA`FUhSJ^H6Tz;;LEWJD3
+!s100 ;:372]LZ`mD8TPXSNN40?3
+R8
+32
+R91
+!i10b 1
+R110
+R111
+R112
+!i113 1
+R13
+R14
+Ereg16
+R1
+R2
+R3
+R4
+R5
+R0
+Z113 8C:/Users/Mohamed Aaziz/VLSI/VHDL/reg16.vhd
+Z114 FC:/Users/Mohamed Aaziz/VLSI/VHDL/reg16.vhd
+l0
+L6
+VTkn_Q[_Yna6nPWD[JD^OC0
+!s100 UcaOSCnB;D=:>C[TGLC]d2
+R8
+32
+R91
+!i10b 1
+R110
+Z115 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/reg16.vhd|
+Z116 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/reg16.vhd|
+!i113 1
+R13
+R14
+Abehav
+R2
+R3
+R4
+R5
+DEx4 work 5 reg16 0 22 Tkn_Q[_Yna6nPWD[JD^OC0
+l14
+L13
+V=CbdI]9;@B2>Ybg;ciW4?2
+!s100 Vj2e;agbS_Z35NZ]FT_o03
+R8
+32
+R91
+!i10b 1
+R110
+R115
+R116
+!i113 1
+R13
+R14
+Ereg8
+R1
+R4
+R5
+R0
+Z117 8C:/Users/Mohamed Aaziz/VLSI/VHDL/reg8.vhd
+Z118 FC:/Users/Mohamed Aaziz/VLSI/VHDL/reg8.vhd
+l0
+L3
+V9dYkjPQ_2agI;m59dD`Q73
+!s100 cQBB91nCR_gWiX?NZC3;j3
+R8
+32
+R91
+!i10b 1
+R110
+Z119 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/reg8.vhd|
+Z120 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/reg8.vhd|
+!i113 1
+R13
+R14
+Aa_reg8
+R4
+R5
+DEx4 work 4 reg8 0 22 9dYkjPQ_2agI;m59dD`Q73
+l11
+L10
+V=gS16C6l<elSo7Jme2C9g3
+!s100 6Vj6i_ad:VhYlhVHU^KJ?0
+R8
+32
+R91
+!i10b 1
+R110
+R119
+R120
+!i113 1
+R13
+R14
+Eregster
+R1
+R2
+R3
+R4
+R5
+R0
+Z121 8C:/Users/Mohamed Aaziz/VLSI/VHDL/Rigister.vhd
+Z122 FC:/Users/Mohamed Aaziz/VLSI/VHDL/Rigister.vhd
+l0
+L6
+VB_]C?_K]a@E18jQIg>ii:3
+!s100 Mb?`2f>gS`aFn4z_:h2B33
+R8
+32
+R91
+!i10b 1
+R110
+Z123 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Mohamed Aaziz/VLSI/VHDL/Rigister.vhd|
+Z124 !s107 C:/Users/Mohamed Aaziz/VLSI/VHDL/Rigister.vhd|
+!i113 1
+R13
+R14
+Abehav
+R2
+R3
+R4
+R5
+DEx4 work 7 regster 0 22 B_]C?_K]a@E18jQIg>ii:3
+l21
+L20
+VkgS=1Kd86olz3XhL>h;:30
+!s100 3Ldci`LIT@8VSaE81UkTI3
+R8
+32
+R91
+!i10b 1
+R110
+R123
+R124
+!i113 1
+R13
+R14
