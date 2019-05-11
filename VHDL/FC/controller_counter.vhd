@@ -11,7 +11,7 @@ entity FC_controller is
     port (
         clk            : in    std_logic; 
         rst            : in    std_logic;
-        initiate       : inout std_logic;
+        initiate       : inout std_logic; -- signal to start FC from CNN
 
         -- IO integration
         enable_read     : out std_logic;
@@ -19,15 +19,10 @@ entity FC_controller is
         data_in         : in std_logic_vector(255 downto 0);
 
         answer    : out std_logic_vector(3 downto 0);
-        done_comp : inout std_logic
+        done_comp : inout std_logic;
+
+        cnn_address  : in std_logic_vector(15 downto 0) -- address of the first neuron in ram form CNN
         
-        -- memory
-        --clk_inv        : in    std_logic; 
-        --enable_mar_in  : inout std_logic;
-        --enable_mdr_in  : inout std_logic;
-        --enable_mdr_out : inout std_logic;
-        --enable_write   : inout std_logic;
-        --mdr_data_out   : inout std_logic_vector(255 downto 0);
     );
 end entity FC_controller;
 
@@ -117,6 +112,9 @@ architecture a_FC_controller of FC_controller is
     
     signal start_comp : std_logic;
 
+    signal neuron   : std_logic_vector(15 downto 0);
+    signal temp     : std_logic_vector(15 downto 0);  -- temp signal used to store address
+    signal neuron_address : std_logic_vector(15 downto 0);
 begin
 	
     process( clk , rst , ready_signal)
@@ -147,11 +145,14 @@ begin
             label_9_input_state_machine  <= (15 downto 0 => '0');
             label_10_input_state_machine <= (15 downto 0 => '0');
 
+	    neuron_address <= (15 downto 0 => '0');
+	    temp <=  (15 downto 0 => '0');
         elsif (clk'event and clk = '1') then
             if(initiate = '1') then
                 ready_signal <= '0'; 
-		        initiate <= '0';
-                state <= "000";       
+		initiate <= '0';
+                state <= "000";
+		neuron_address <= cnn_address;       
             elsif (state = "000" ) then
                 if (sub_state = "000") then
                     sel_dst <= "0000"; 
@@ -197,7 +198,8 @@ begin
                     alu_sel <= '0';
                 elsif (sub_state = "011") then
                     sub_state <= "100";
-                    address_in <= alu_out; 
+                    address_in <= alu_out;
+                    temp <= alu_out; 
                 else
                     sub_state <= "000";
                     state <= "010";
@@ -230,21 +232,38 @@ begin
                         enable_decoder_dst <= '0';
                         ready_signal <= '0';
                         sub_state <= "001";
+                        address_in <= neuron_address;
                     elsif (sub_state = "001") then
                         sub_state <= "010";
                         enable_read <= '1';
-                        alu_inp1 <= address_out;
+                    elsif (sub_state = "010") then
+                        sub_state <= "011";
+                        neuron <= data_in(15 downto 0);
+                        enable_read <= '0';
+			            alu_inp1 <= address_out;
                         alu_inp2 <= "0000000000000001";
                         alu_sel <= '0';
-                    elsif ( sub_state = "010" ) then
-                        sub_state <= "011";
-                        address_in <= alu_out;
-                    else 
-	    	        	sub_state <= "000";
+                    elsif (sub_state = "011") then
+                        sub_state <= "100";
+			            neuron_address <= alu_out;
+                    elsif ( sub_state = "100" ) then
+                        sub_state <= "101";
+                        address_in <= temp;
+                    elsif (sub_state = "101") then
+			            sub_state <= "110";
+		    	        enable_read <= '1';
+		            elsif (sub_state = "110") then
+			            alu_inp1 <= address_out;
+                        alu_inp2 <= "0000000000000001";
+                        alu_sel <= '0';
+			            sub_state <= "111";
+		            else
+	    	            sub_state <= "000";
 		    	        state <= "011";
                         enable_read <= '0';
+                        temp <= alu_out;
                     end if;    
-                end if ;
+                end if;
             elsif(state = "011") then
                 if (sub_state = "000") then
                     sel_dst <= "0000"; 
@@ -268,10 +287,6 @@ begin
         end if;
     end process; 
     
-    -- specialregfile : entity work.special_register_file port map ( clk , clk_inv , rst ,  enable_mar_in , enable_mdr_in , enable_mdr_out , enable_write , address_out, mdr_data_out );
-    -- address_out <= address_out_7 & address_out_6 & address_out_5 & address_out_4 & address_out_3 & address_out_2 & address_out_1 & address_out_0;
-    -- signal address_out : std_logic_vector(7 downto 0);
-
     max_calc : entity work.maximum_ic port map(
         clk         ,
         rst         ,
@@ -337,6 +352,7 @@ begin
         done,
 
         -- Neuron and its weights
+        neuron,
         data_in(15 downto 0),
         data_in(31 downto 16),
         data_in(47 downto 32),
@@ -347,7 +363,6 @@ begin
         data_in(127 downto 112),
         data_in(143 downto 128),
         data_in(159 downto 144),
-        data_in(175 downto 160),
         
         label_1_input_booth,
         label_2_input_booth,

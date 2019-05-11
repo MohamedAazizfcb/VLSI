@@ -54,7 +54,8 @@ Signal DataFromRam : std_logic_vector (255 DOWNTO 0);
 Signal ProcessEnable : std_logic;
 
 ---------- FC Signals -------------
-signal FC_init 		: std_logic;   -- signal from CNN to initiate FC
+signal FC_init 			: std_logic;   -- signal from CNN to initiate FC
+signal neuron_address	: std_logic_vector(15 downto 0); -- address of first neuron in ram from CNN to FC
 ----------------------------------
 begin	
 r0:IOCHIP Port Map (OuterRead,OuterWrite,ActivateOuterAddress,INCEnable,PDone,OuterAddress,ResultIn,
@@ -69,7 +70,8 @@ FC: entity work.FC_controller port map(
 				OuterAddress,
 				DataFromRam,
 				Result,
-				PDone
+				PDone,
+				neuron_address
 			);
 
 end arch;
