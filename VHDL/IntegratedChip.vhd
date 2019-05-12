@@ -50,23 +50,18 @@ Signal OuterAddress : std_logic_vector(15 DOWNTO 0);
 Signal PClk : std_logic;
 Signal DataFromRam, DataToRam : std_logic_vector (511 DOWNTO 0); -- added
 Signal ProcessEnable : std_logic;
-Signal 
-
-
---------------CNN Signals----------
-signal MFC		: std_logic    --temp
-
-
+ 
+signal x_MFC: std_logic;
 ---------- FC Signals -------------
 signal FC_init 			: std_logic;   -- signal from CNN to initiate FC
 signal neuron_address	: std_logic_vector(15 downto 0); -- address of first neuron in ram from CNN to FC
 signal clk_inv			: std_logic;
 ----------------------------------
 begin	
-r0:IOCHIP Port Map (OuterRead,OuterWrite,ActivateOuterAddress,DataToRam,'0',PDone,OuterAddress,"0000",
+r0:IOCHIP Port Map (OuterRead,OuterWrite,ActivateOuterAddress,DataToRam,'0',PDone,OuterAddress,
 			CLK,LP,INTR,CNNIMGLOAD,Rst,
-			DataFromRam,Done,ProcessEnable,MFC);
-
+			DataFromRam,Done,ProcessEnable,x_MFC);
+ActivateOuterAddress <= OuterRead or OuterWrite;
 clk_inv <= not(CLK);
 FC: entity work.FC_controller port map(
 				clk_inv,
@@ -83,7 +78,7 @@ FC: entity work.FC_controller port map(
 	
 CNN: entity work.control_unit port map(
 				CLK,
-				MFC, --added
+				x_MFC, --added
 				DataFromRam,
 				DataToRam, -- added
 				OuterAddress,
