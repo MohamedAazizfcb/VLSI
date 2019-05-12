@@ -9,7 +9,8 @@ entity row_loading_process is
            row0_en,row1_en,row2_en,row3_en,row4_en,row_counter_en : out std_logic;
 		   row_ptr : out std_logic_vector(2 downto 0) := "000";
 		   flag : out std_logic_vector(7 downto 0) := "00000000";
-		   first_time_temp : out std_logic := '1';
+		  -- first_time_temp : out std_logic := '1';
+		   Start_signal: in std_logic;
 		   images_covered_xor_out, row_is_done,Cond2_sub: in std_logic);
 end row_loading_process;
 
@@ -84,8 +85,11 @@ begin
 
 			if(Cond8 = '1') then 
 				flago <= "00000000";
-				first_time_temp <= '0';
+				--first_time_temp <= '0';
 			end if; 	
+
+			--if(Start_signal = '1') then first_time_temp <= '1'; end if;
+
 			if(images_covered_xor_out = '1' and Cond2_sub = '1' and row_is_done = '1') then 
 				row_ptro <= "000";
  		  	end if;
