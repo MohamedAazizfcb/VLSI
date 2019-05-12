@@ -19,7 +19,7 @@ end control_unit;
 
 architecture controlUnit of control_unit is
 -- Process signal received from the IO module
-signal Pro_signal: std_logic := '0';
+signal Pro_signal: std_logic := '1';
 --signal Go_FC_Go: std_logic;
 signal row0_en, row1_en, row2_en, row3_en, row4_en,row_counter_en: std_logic;
 
@@ -59,7 +59,7 @@ signal state_counter_out: std_logic_vector(7 downto 0);
 signal rst_first_time: std_logic;
 signal first_time_out: std_logic_vector(0 downto 0) := "0";
 signal first_time_en : std_logic_vector(0 downto 0);
-signal first_time_temp: std_logic;
+signal first_time_temp: std_logic := '1';
 
 
 -- Layers number register variables -- 3 bits(8 max as mentioned)
@@ -239,7 +239,7 @@ begin
  Cond2 <= Pro_signal and state_counter_out(0) AND not state_counter_out(1) AND not state_counter_out(2) AND not state_counter_out(3)  AND not state_counter_out(4);   
  
  enable_filter_ptr_inc <= (Cond2 and x_MFC) or filter_en;
- filter_ptr:entity work.up_counter_top_filter generic map(16)port map(clk ,enable_filter_ptr_inc,Start_signal,'0',filter_ptr_out);
+ filter_ptr:entity work.up_counter_top_filter_special generic map(16)port map(clk ,enable_filter_ptr_inc,Start_signal,'0',filter_ptr_out);
  filter_ptr_en <= Cond2 or (Cond2 and not x_MFC) or (Cond4 and conv_pool and not filter_loaded); --edited
  filter_ptr_tri: entity work.tri_state generic map(16) port map(filter_ptr_en,filter_ptr_out,ram_address);
           
@@ -278,7 +278,7 @@ Row3_reg : entity work.n_dff generic map(512) port map( clk , Cond1 , row3_en, d
 Row4_reg : entity work.n_dff generic map(512) port map( clk , Cond1 , row4_en, data_out, row4);
 
 
-rows_loading_process: entity work.row_loading_process port map(Cond3,Cond8,x_MFC,zero_flag_rows,row0_en,row1_en,row2_en,row3_en,row4_en,row_counter_en,row_ptr,flag,first_time_temp, images_covered_xor_out, row_is_done,Cond2_sub);
+rows_loading_process: entity work.row_loading_process port map(Cond3,Cond8,x_MFC,zero_flag_rows,row0_en,row1_en,row2_en,row3_en,row4_en,row_counter_en,row_ptr,flag,Start_signal, images_covered_xor_out, row_is_done,Cond2_sub);
 --------------------------------------------------------------------------------------------------------------------------
 -- sorted rows
 row0_mux : entity work.mux5x1 generic map(512) port map(filters_size(1),row_ptr,row0,row1,row2,row3,row4,row0_sorted); 
@@ -349,7 +349,7 @@ operation_logic: entity work.CNN_Pyramid port map(clk,Cond5,conv_pool,five,filte
 wait_op_en <= Cond5;
 --wait_op_rst <= Cond8 or Start_signal;
 wait_operation: entity work.up_counter_top port map(clk,wait_op_en,Cond8,Start_signal,wait_op_out);
-get_done_sig: entity work.xor_1bit_out_8bit port map(wait_op_out, "00010110",op_done);
+get_done_sig: entity work.xor_1bit_out_8bit port map(wait_op_out, "00010100",op_done);
 --------------------------------------------------------------------------------------------------------------------------------------------
 Cond6 <= Pro_signal and state_counter_out(0) AND state_counter_out(1) AND state_counter_out(2) AND not state_counter_out(3)  AND not state_counter_out(4);   
 
@@ -391,9 +391,12 @@ process(clk,Cond5,images_covered_xor_out, Cond3, row_is_done,filter_en,Start_sig
 		if(clk'event and clk = '1') then 
 			
 			if(Cond2 = '1') then current_img_ptr <= img_ptr_value_force; end if;
-
+			
+			if(Cond8 = '1') then first_time_temp <= '0'; end if;
+			
 			if(Start_signal = '1') then 
 				Pro_signal <= '1';
+				first_time_temp <= '1';
 				img_ptr <= "0000000000010000";
 				alt_img_ptr <= "0000000000001000";
 				current_img_ptr <= "0000000000010000";
